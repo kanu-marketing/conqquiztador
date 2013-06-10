@@ -1,0 +1,8 @@
+﻿Extract from prototype.js only the logic for class create and inheritance
+research social networks integration
+	- fb login
+	- like buttons
+	- tweet result
+Q.js extract only logic for promises 
+Minify all js files when ready
+
