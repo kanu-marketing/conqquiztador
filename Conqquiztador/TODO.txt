@@ -16,6 +16,3 @@ Q.js extract only logic for promises
 	-research how to change $ with something else
 
 Minify all js files when ready
-
-
-
