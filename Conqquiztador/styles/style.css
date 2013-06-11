@@ -21,7 +21,7 @@
 
 }
 
-#al {
+#dummy_player {
 	margin-right: 20%;
 	float:right;
 	margin-top: 30px;
@@ -30,20 +30,33 @@
 	right: 50%
 }
 
+#mouse_pointer {
+	background-image:url('../images/world_map.png');
+	width:700px;
+	height:333px;	   
+    margin:2px;
+    margin-left: 10%;
+}
+
+#flag {
+	position:relative;
+	visibility:hidden;
+	z-index:2;
+	width:100px;
+	height:120px;
+}
+
+#dummy_flag { 
+        padding-left: 80px;
+      
+    }
+
 .container {
 	border-radius: 5px;
 	border: 1px solid black;
 	padding:10px;
 	margin:5px;
 }
-
-	#mouse_pointer {
-		background-image:url('../images/World_Map_FIVB.png');
-		width:700px;
-		height:333px;	   
-        margin:2px;
-        margin-left: 10%;
-	}
 
 	.container #question_child {
 		background-color: green;
@@ -53,14 +66,14 @@
 		background-color: purple;
 	}
 	
-	.container #al_child {
+	.container #dummy_child {
 		background-color: orange;
 	}
 
-	.container #field_child, .container #question_child, .container #player_child, .container #al_child {
+	.container #field_child, .container #question_child, .container #player_child, .container #dummy_child {
 		float: left;
-		height: 60px;
-		width: 60px;
+		height: 40px;
+		width: 80px;
 		border-radius:5px;
 		user-select:none;
 		text-align:center;
@@ -69,11 +82,3 @@
 		font-weight:bold; 
 		text-align:center;
 	}
-
-#flag {
-	position:relative;
-	visibility:hidden;
-	z-index:2;
-	width:100px;
-	height:120px;
-}
