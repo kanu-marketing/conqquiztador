@@ -63,6 +63,10 @@
     <Content Include="Game ViewModel\question.js" />
     <Content Include="Game ViewModel\renderer.js" />
     <Content Include="Game ViewModel\siteController.js" />
+    <Content Include="images\animated-flag-india.gif" />
+    <Content Include="images\boy_cuba_flag_animated.gif" />
+    <Content Include="images\bulgaria_map.png" />
+    <Content Include="images\world_map.png" />
     <Content Include="index.html" />
     <Content Include="Model\bd-multiple-choice-questions.js" />
     <Content Include="Model\bd-short-answer-questions.js" />
@@ -88,7 +92,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game View\" />
-    <Folder Include="NewFolder1\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
