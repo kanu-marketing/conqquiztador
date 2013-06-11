@@ -37,8 +37,10 @@
 	margin:5px;
 }
 
-	.container #field_child {
-		background-color: blue;
+	#mouse_pointer {
+		background-image:url('../images/World_Map_FIVB.png');
+		width:700px;
+		height:333px;	   
         margin:2px;
         margin-left: 10%;
 	}
@@ -67,3 +69,11 @@
 		font-weight:bold; 
 		text-align:center;
 	}
+
+#flag {
+	position:relative;
+	visibility:hidden;
+	z-index:2;
+	width:100px;
+	height:120px;
+}

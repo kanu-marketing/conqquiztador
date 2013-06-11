@@ -1,16 +1,16 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+﻿<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Conqquiztador</title>
     <link rel="stylesheet" type="text/css" href="styles/style.css">
     <script src="scripts/jquery-1.10.0.js"></script>
     <script src="scripts/prototype.js"></script>
     <script src="scripts/q.js"></script>
+    <script src="Game ViewModel/gameField.js"></script>
 </head>
 <body>
     <div id="game_field" class="container">
-		<img id="map" src="images/map.png" alt="Map of Bulgaria" />
-        <div id="field_child">
+        <div id="mouse_pointer" onclick="getPointCoordinates(event)">
+            <img id="flag" src="images/animated-flag-india.gif" alt="Flag of India">
         </div>
     </div>
     <div id="question_box" class="container">
