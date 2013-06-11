@@ -63,10 +63,14 @@
     <Content Include="Game ViewModel\renderer.js" />
     <Content Include="Game ViewModel\siteController.js" />
     <Content Include="index.html" />
+    <Content Include="Model\bd-multiple-choice-questions.js" />
+    <Content Include="Model\bd-short-answer-questions.js" />
     <Content Include="scripts\jquery-1.10.0.js" />
     <Content Include="scripts\prototype.js" />
     <Content Include="scripts\q.js" />
     <Content Include="styles\style.css" />
+    <Content Include="test-styles.css" />
+    <Content Include="test.html" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -83,7 +87,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Game View\" />
-    <Folder Include="Model\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
