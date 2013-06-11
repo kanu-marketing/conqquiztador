@@ -66,6 +66,7 @@
     <Content Include="scripts\jquery-1.10.0.js" />
     <Content Include="scripts\prototype.js" />
     <Content Include="scripts\q.js" />
+    <Content Include="styles\style.css" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
