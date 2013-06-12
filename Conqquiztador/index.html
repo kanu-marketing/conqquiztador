@@ -5,7 +5,7 @@
     <script src="scripts/jquery-1.10.0.js"></script>
     <script src="scripts/prototype.js"></script>
     <script src="scripts/q.js"></script>
-    <script src="Game ViewModel/gameField.js"></script>
+    <script src="game-view-model/gameField.js"></script>
 </head>
 <body>
     <div id="game_field" class="container">
@@ -23,13 +23,13 @@
             <h3>Question</h3>
         </div>
         <div id="mc-question-container"></div>
-        <script src="Game%20ViewModel/question.js"></script>
+        <script src="game-view-model/question.js"></script>
         <script>
             (function ($) {
 
                 $(".flags").on('click', function () {
 
-                    $.getJSON("Model/bd-multiple-choice-questions.js", function (data) {
+                    $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
                         var questionsNumber = data.length;
 
                         var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);

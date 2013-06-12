@@ -57,12 +57,11 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Game ViewModel\dummyPlayer.js" />
-    <Content Include="Game ViewModel\gameField.js" />
-    <Content Include="Game ViewModel\humanPlayer.js" />
-    <Content Include="Game ViewModel\question.js" />
-    <Content Include="Game ViewModel\renderer.js" />
-    <Content Include="Game ViewModel\siteController.js" />
+    <Content Include="game-view-model\gameField.js" />
+    <Content Include="game-view-model\players.js" />
+    <Content Include="game-view-model\question.js" />
+    <Content Include="game-view-model\renderer.js" />
+    <Content Include="game-view-model\site-controller.js" />
     <Content Include="images\animated-flag-india.gif" />
     <Content Include="images\blue_flag.png" />
     <Content Include="images\boy_cuba_flag_animated.gif" />
@@ -71,8 +70,8 @@
     <Content Include="images\red_flag.png" />
     <Content Include="images\world_map.png" />
     <Content Include="index.html" />
-    <Content Include="Model\bd-multiple-choice-questions.js" />
-    <Content Include="Model\bd-short-answer-questions.js" />
+    <Content Include="model\bd-multiple-choice-questions.js" />
+    <Content Include="model\bd-short-answer-questions.js" />
     <Content Include="scripts\jquery-1.10.0.js" />
     <Content Include="scripts\prototype.js" />
     <Content Include="scripts\q.js" />
@@ -94,7 +93,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Game View\" />
+    <Folder Include="game-view\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

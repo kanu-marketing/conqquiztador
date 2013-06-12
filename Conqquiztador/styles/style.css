@@ -9,7 +9,7 @@
 	margin:auto;
 	margin-top: 30px;
 	width: 50%;
-	height: 100px;
+	min-height: 100px;
     color: #6B6565;
 }
 
@@ -97,10 +97,36 @@
     padding-top: 60px;
 }
 
+/*Questions styles*/
 .multiple-question {
-    width: 500px;
     margin-left:100px;
+    width: 500px;
+    text-align: center;
+    border: 1px solid #000;
     top:0px;
 }
+
+    .multiple-question td, .multiple-question th {
+        padding-top: 5px;
+        padding-bottom: 5px;
+        border: 1px solid #000;
+        border-collapse: collapse;
+    }
+
+    .short-question{
+        text-align: center;
+        width: 500px;
+    }
+
+    .short-question p{
+        font-weight: bold;
+    }
+
+    .short-question input[type=text]{
+        margin-bottom: 5px;
+    }
+
+
+/*End of questions styles*/
 
 
