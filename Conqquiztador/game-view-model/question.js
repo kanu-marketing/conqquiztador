@@ -29,11 +29,11 @@
 
                 var firstCell = $("<td></td>");
                 firstCell.attr("id", counter);
-                firstCell.append(counter + ". " + this.choices[i]);
+                firstCell.append(counter + ". " + this.choices[counter - 1]);
 
                 var secondCell = $("<td></td>");
                 secondCell.attr("id", counter + 1);
-                secondCell.append(counter + 1 + ". " + this.choices[i]);
+                secondCell.append(counter + 1 + ". " + this.choices[counter]);
 
                 row.append(firstCell, secondCell);
 
@@ -88,8 +88,6 @@ var QuestionParser = (function () {
         var mcQuestion = new MultipleChoiceQuestion(json.task, json.answer, answers);
         return mcQuestion;
     }
-
-
 
     return {
         parseShortAnswerQuestion: parseShortAnswerQuestion,
