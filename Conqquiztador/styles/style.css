@@ -10,6 +10,7 @@
 	margin-top: 30px;
 	width: 50%;
 	height: 100px;
+    color: #6B6565;
 }
 
 #player {
@@ -42,8 +43,8 @@
 	position:relative;
 	visibility:hidden;
 	z-index:2;
-	width:100px;
-	height:120px;
+	width:50px;
+	height:50px;
 }
 
 #dummy_flag { 
@@ -71,7 +72,7 @@
 	}
 
 	.container #field_child, .container #question_child, .container #player_child, .container #dummy_child {
-		float: left;
+        float:left;
 		height: 40px;
 		width: 80px;
 		border-radius:5px;
@@ -82,3 +83,24 @@
 		font-weight:bold; 
 		text-align:center;
 	}
+
+.flags {
+    height: 50px;
+    width: 50px;
+}
+
+#flag1 {
+    padding-top: 30px;
+}
+
+#flag2 {
+    padding-top: 60px;
+}
+
+.multiple-question {
+    width: 500px;
+    margin-left:100px;
+    top:0px;
+}
+
+
