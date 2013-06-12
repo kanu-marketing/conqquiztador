@@ -12,7 +12,7 @@
     <div id="mc-question-container"></div>
     <button id="show-sa-question">Show short answer question</button>
     <div id="sa-question-container"></div>
-    <script src="Game%20ViewModel/question.js"></script>
+    <script src="game-view-model/question.js"></script>
     <script>
         (function ($) {
             //var question = new Question("Do aliens exist?", "Yes, they do!")
@@ -27,7 +27,7 @@
 
             $("#show-sa-question").on('click', function () {
 
-                $.getJSON("Model/bd-short-answer-questions.js", function (data) {
+                $.getJSON("model/bd-short-answer-questions.js", function (data) {
                     var questionsNumber = data.length;
 
                     var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
@@ -41,7 +41,7 @@
 
             $("#show-mc-question").on('click', function () {
 
-                $.getJSON("Model/bd-multiple-choice-questions.js", function (data) {
+                $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
                     var questionsNumber = data.length;
 
                     var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
@@ -52,8 +52,6 @@
 
                 });
             });
-
-
         }(jQuery));
     </script>
 </body>
