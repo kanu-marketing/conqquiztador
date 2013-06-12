@@ -1,6 +1,6 @@
 ﻿NB !!! Assign tasks !!!
 	- Ventsi Question class( db, serialization, deser and question class);
-	- I. Ivanov
+	- I. Ivanov : site controller and players
 	- I. Petrov
 	- Asya
 	- Ivo
