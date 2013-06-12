@@ -71,7 +71,6 @@
         Question: Question,
         MultipleChoiceQuestion: MultipleChoiceQuestion,
         ShortAnswerQuestion: ShortAnswerQuestion,
-       // QuestionParser: QuestionParser
     }
 }(jQuery))
 

@@ -1,88 +1,105 @@
-﻿#game_field {		
-	margin:auto;
-	margin-top: 30px;
-	width: 70%;
-	height: 380px;
+﻿.player_id {
+    zoom: 1;
+}
+
+    .player_id:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+body {
+    background: url("../images/green-board.jpg") no-repeat;
+    color: #fff;
+    font-weight: bolder;
+}
+
+#wrapper {
+    display: none;
+}
+
+#game_field, #question_box, #player, #dummy_player, #welcome-screen {
+    background-color: rgba(0,0,0,0.3);
+}
+
+#game_field {
+    margin: auto;
+    margin-top: 15px;
+    width: 70%;
+    height: 330px;
 }
 
 #question_box {
-	margin:auto;
-	margin-top: 30px;
-	width: 50%;
-	min-height: 100px;
+    margin: auto;
+    margin-top: 30px;
+    width: 50%;
+    min-height: 100px;
     color: #6B6565;
 }
 
 #player {
-	margin-left: 20%;
-	margin-top: 30px;
-	float: left;
-	width: 300px;
-	height: 100px;
-
+    margin-left: 20%;
+    margin-top: 30px;
+    float: left;
+    width: 300px;
+    height: 100px;
 }
 
 #dummy_player {
-	margin-right: 20%;
-	float:right;
-	margin-top: 30px;
-	width: 300px;
-	height: 100px;
-	right: 50%
+    margin-right: 20%;
+    float: right;
+    margin-top: 30px;
+    width: 300px;
+    height: 100px;
+    right: 50%;
 }
 
 #mouse_pointer {
-	background-image:url('../images/world_map.png');
-	width:700px;
-	height:333px;	   
-    margin:2px;
-    margin-left: 10%;
+    background-image: url('../images/world_map-for-web.png');
+    width: 700px;
+    height: 330px;
+    margin: 2px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #flag {
-	position:relative;
-	visibility:hidden;
-	z-index:2;
-	width:50px;
-	height:50px;
+    position: relative;
+    visibility: hidden;
+    z-index: 2;
+    width: 50px;
+    height: 50px;
 }
 
-#dummy_flag { 
-        padding-left: 80px;
-      
-    }
+#dummy_flag {
+    padding-left: 80px;
+}
 
 .container {
-	border-radius: 5px;
-	border: 1px solid black;
-	padding:10px;
-	margin:5px;
+    border-radius: 5px;
+    border: 3px solid #fff;
+    padding: 10px;
+    margin: 5px;
 }
 
-	.container #question_child {
-		background-color: green;
-	}
+    .container #question_child {
+        background-color: green;
+    }
 
-	.container #player_child {
-		background-color: purple;
-	}
-	
-	.container #dummy_child {
-		background-color: orange;
-	}
 
-	.container #field_child, .container #question_child, .container #player_child, .container #dummy_child {
-        float:left;
-		height: 40px;
-		width: 80px;
-		border-radius:5px;
-		user-select:none;
-		text-align:center;
-		vertical-align:central;
-		color:white;
-		font-weight:bold; 
-		text-align:center;
-	}
+
+    .container #field_child, .container #question_child, .container #player_child, .container #dummy_child {
+        float: left;
+        height: 40px;
+        width: 80px;
+        border-radius: 5px;
+        user-select: none;
+        text-align: center;
+        vertical-align: central;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
 
 .flags {
     height: 50px;
@@ -97,36 +114,99 @@
     padding-top: 60px;
 }
 
+
+/*Welcome screen styles*/
+#welcome-screen {
+    margin: 15px auto;
+    width: 500px;
+    height: 350px;
+    text-align: center;
+}
+
+    #welcome-screen h1 {
+        margin-bottom: 75px;
+        font-size: 55px;
+    }
+
+    #welcome-screen form {
+        text-align: center;
+    }
+
+    #welcome-screen input {
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+#nickname {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+
+/*End of welcome screen styles*/
+
 /*Questions styles*/
 .multiple-question {
-    margin-left:100px;
+    margin-left: 100px;
     width: 500px;
     text-align: center;
-    border: 1px solid #000;
-    top:0px;
+    border: 1px solid #fff;
+    top: 0px;
 }
 
     .multiple-question td, .multiple-question th {
         padding-top: 5px;
         padding-bottom: 5px;
-        border: 1px solid #000;
+        border: 1px solid #fff;
         border-collapse: collapse;
     }
 
-    .short-question{
-        text-align: center;
-        width: 500px;
+    .multiple-question td {
+        cursor: pointer;
     }
 
-    .short-question p{
+.short-question {
+    text-align: center;
+    width: 500px;
+}
+
+    .short-question p {
         font-weight: bold;
     }
 
-    .short-question input[type=text]{
+    .short-question input[type=text] {
         margin-bottom: 5px;
     }
-
-
 /*End of questions styles*/
+
+
+/*Players styles*/
+.name {
+    float: left;
+}
+
+.points {
+    float: right;
+}
+
+.name, .points {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#player .name, #player .points {
+    background-color: rgba(255,216,0,0.5);
+}
+
+#dummy_player .name, #dummy_player .points {
+    background-color: rgba(255,106,0,0.5);
+}
+
+.player_flags {
+    text-align: center;
+}
+
+/*End of players styles*/
 
 
