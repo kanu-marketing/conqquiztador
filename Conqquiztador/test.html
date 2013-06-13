@@ -5,6 +5,7 @@
     <script src="scripts/jquery-1.10.0.js"></script>
     <script src="scripts/prototype.js"></script>
     <script src="scripts/q.js"></script>
+    <script src="game-view-model/quiz-game.js"></script>
     <link href="styles/style.css" rel="stylesheet" />
     <link href="test-styles.css" rel="stylesheet" />
 </head>
@@ -14,8 +15,6 @@
         <div id="mc-question-container"></div>
         <button id="show-sa-question">Show short answer question</button>
         <div id="sa-question-container"></div>
-        <script src="game-view-model/question.js"></script>
-        <script src="game-view-model/players.js"></script>
     </div>
 
 
@@ -28,11 +27,12 @@
             <input type="button" id="nickname-button" value="Play!" />
         </form>
     </div>
+    
     <script>
         (function ($) {
-            var dummyPlayer = new DummyPlayer("Robocop")
-            var saQuestion = new ShortAnswerQuestion("Test", 1111, 1111, 1112);
-            var mcQuestion = new MultipleChoiceQuestion("Test", 3, ["a", "a", "a", "a"]);
+            var dummyPlayer = new QuizGame.DummyPlayer("Robocop")
+            var saQuestion = new QuizGame.ShortAnswerQuestion("Test", 1111, 1111, 1112);
+            var mcQuestion = new QuizGame.MultipleChoiceQuestion("Test", 3, ["a", "a", "a", "a"]);
 
             var saAnswer = dummyPlayer.getShortQuestionAnswer(saQuestion);
             var mcAnswer = dummyPlayer.getMultipleQuestionAnswer();
