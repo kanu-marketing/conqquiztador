@@ -1,6 +1,7 @@
 ﻿/// <reference path="../scripts/jquery-1.10.0.js" />
 /// <reference path="../scripts/q.js" />
 /// <reference path="question.js" />
+/// <reference path="quiz-game.js" />
 
 /// Game flow
 /// 1. init player - choose nickname
@@ -12,63 +13,84 @@
 /// . select round winner and add points
 /// . repeat 2. until all fields are taken
 
-    
-//(function () {
-$(document).ready(function() {
-    
-    //window.addEventListener('load', function () {
-    'use strict';
+var a = (function ($) {
 
-    console.log("site controller");
-    var gameRenderer = new GameRenderer.Renderer();
-    var gameFiled = new QuizGame.GameField();
-    gameRenderer.renderWelcome();
+    var SiteController = Class.create({
+        initialize: function (player, dummyPlayer) {
+            this.field = new QuizGame.GameField();
+            this.player = player;
+            this.dummyPlayer = dummyPlayer;
+        },
+        startGame: function () {
+            console.log("site controller");
+            var gameRenderer = new GameRenderer.Renderer();
+            var gameFiled = new QuizGame.GameField();
 
-    $("#new_game").on('click', function () {
-        gameStarter = gameStarter.startNewGame();
+            gameRenderer.renderWelcome();
 
-        $(".flags").on('click', function () {
-            $("#" + this.id).hide();
-            $("#red_" + this.id).show();
+            $("#new_game").on('click', function () {
+               this.field.startNewGame();
 
-            $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
-                var questionsNumber = data.length;
+                $(".flags").on('click', function () {
+                    $("#" + this.id).hide();
+                    $("#red_" + this.id).show();
 
-                var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
-                var question = QuestionParser.parseMultipleChoiceQuestion(data[index]);
+                    $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
+                        var questionsNumber = data.length;
 
-                // TODO: check if question is has been already shown
-                $("#mc-question-container").html(question.render());
+                        var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
+                        var question = QuestionParser.parseMultipleChoiceQuestion(data[index]);
+
+                        // TODO: check if question is has been already shown
+                        $("#mc-question-container").html(question.render());
+                    });
+                });
+
+                $("#stop_game").click(function () {
+                    gameStarter = new StartGame()
+                    gameStarter.stopGame();
+                });
             });
-        });
 
-        $("#stop_game").click(function () {
-            gameStarter = new StartGame()
-            gameStarter.stopGame();
-        });
+            var nickname = "";
+            $("#nickname-button").on("click", function () {
+                nickname = document.getElementById("nickname").value;
+                $("#welcome-screen").fadeOut(1000).promise()
+                .then(function () {
+                    $("#wrapper").fadeIn(1000)
+                })
+                .then(function () {
+                    this.player = new QuizGame.Player(nickname);
+                    this.dummyPlayer = new QuizGame.DummyPlayer();
+
+                    $("#player").append(this.player.render("player_child"));
+                    $("#dummy_player").html(this.dummyPlayer.render("dummy_child"));
+                });
+            });
+        }
+        
     });
 
-    var player;
-    var dummyPlayer;
-    /// 1. init player - choose nickname
-    var nickname = "";
-    $("#nickname-button").on("click", function () {
-        nickname = document.getElementById("nickname").value;
-        $("#welcome-screen").fadeOut(1000).promise()
-        .then(function () {
-            $("#wrapper").fadeIn(1000)
-        })
-        .then(function () {
-            player = new QuizGame.Player(nickname);
-            dummyPlayer = new QuizGame.DummyPlayer();
+    return {
+        SiteController: SiteController
+    }
+}(jQuery));
 
-            $("#player").append(player.render("player_child"));
-            $("#dummy_player").html(dummyPlayer.render("dummy_child"));
-        });
-    });
+//(function () {
+//$(document).ready(function () {
 
-    console.log("asd");
-    console.log(player.name);
+//    //window.addEventListener('load', function () {
+//    'use strict';
+//    var player;
+//    var dummyPlayer;
+//    var field;
+//    var siteControler = new a.SiteController(field, player, dummyPlayer);
+
+//    siteControler.startGame();
+    
+
+    //console.log("asd");
+    //console.log(player.name);
     //var startGamePromise = function () {
     //};
     //var chooseFieldPromise = function () {
@@ -116,4 +138,4 @@ $(document).ready(function() {
     //    .than(getRoundWinnder)
     //})
     //.than(getRoundWinner);
-}(jQuery));
+//}(jQuery));
