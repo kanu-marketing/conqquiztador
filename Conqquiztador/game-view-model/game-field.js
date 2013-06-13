@@ -13,7 +13,7 @@
                 var fieldItem = $("<img>").attr({
                     id: "flag" + i,
                     class: 'flags' ,
-                    src: '../images/blue_flag.png' ,
+                    src: 'images/blue_flag.png' ,
                     alt: 'Blue Flag' 
                 });
                 $("#mouse_pointer").append(fieldItem);
@@ -23,7 +23,7 @@
                 var redItem = $("<img>").attr({
                     id: "red_flag" + i,
                     class: 'flags',
-                    src: '../images/red_flag.png',
+                    src: 'images/red_flag.png',
                     alt: 'Red Flag',
                 });
                 redItem.hide();
