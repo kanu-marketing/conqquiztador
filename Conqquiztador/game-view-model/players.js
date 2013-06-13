@@ -12,6 +12,9 @@
         addFlag: function (flag) {
             this._flags.push(flag);
         },
+        addPoints: function (points) {
+            this._points += points;
+        },
         getName: function () {
             return this._name;
         },
