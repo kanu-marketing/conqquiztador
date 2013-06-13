@@ -5,19 +5,17 @@
     <script src="scripts/jquery-1.10.0.js"></script>
     <script src="scripts/prototype.js"></script>
     <script src="scripts/q.js"></script>
-    <script src="game-view-model/gameField.js"></script>
+    <script src="game-view-model/game-field.js"></script>
     <script src="game-view-model/players.js"></script>
 </head>
 <body>
     <div id="wrapper">
         <div id="game_field" class="container">
-            <div id="mouse_pointer" onclick="getPointCoordinates(event)">
+            <button id="new_game">Start game</button>
+            <button id="stop_game">Stop game</button>
+            <button id="help">Help</button>
+            <div id="mouse_pointer">
                 <img id="flag" class="flags" src="images/red_flag.png" alt="Red flag">
-                <img id="flag1" class="flags" src="images/blue_flag.png" alt="Blue flag">
-                <img id="flag2" class="flags" src="images/blue_flag.png" alt="Blue flag">
-                <img id="flag3" class="flags" src="images/blue_flag.png" alt="Blue flag">
-                <img id="flag4" class="flags" src="images/blue_flag.png" alt="Blue flag">
-                <img id="flag5" class="flags" src="images/blue_flag.png" alt="Blue flag">
             </div>
         </div>
         <div id="question_box" class="container">
@@ -50,18 +48,30 @@
 
             var gameRenderer = new Renderer();
             gameRenderer.renderWelcome();
+            
+            $("#new_game").on('click', function () {
+                var gameStarter = new StartGame();
+                gameStarter = gameStarter.startNewGame();
 
-            $(".flags").on('click', function () {
+                $(".flags").on('click', function () {
+                    $("#" + this.id).hide();
+                    $("#red_" + this.id).show();
+                    console.log(this.id);
+                    $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
+                        var questionsNumber = data.length;
 
-                $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
-                    var questionsNumber = data.length;
+                        var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
+                        var question = QuestionParser.parseMultipleChoiceQuestion(data[index]);
 
-                    var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
-                    var question = QuestionParser.parseMultipleChoiceQuestion(data[index]);
+                        // TODO: check if question is has been already shown
+                        $("#mc-question-container").html(question.render());
 
-                    // TODO: check if question is has been already shown
-                    $("#mc-question-container").html(question.render());
-
+                    });
+                });
+                           
+                $("stop_game").on('click', function () {
+                    //gameStarter.stopGame();
+                     $("#mouse_pointer").empty();
                 });
             });
 

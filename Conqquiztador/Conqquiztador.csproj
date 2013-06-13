@@ -57,7 +57,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="game-view-model\gameField.js" />
+    <Content Include="game-view-model\game-field.js" />
     <Content Include="game-view-model\players.js" />
     <Content Include="game-view-model\question.js" />
     <Content Include="game-view-model\renderer.js" />
