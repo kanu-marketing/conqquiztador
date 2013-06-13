@@ -58,6 +58,13 @@ var a = (function ($) {
 
                         // TODO: check if question is has been already shown
                         $("#mc-question-container").html(self.currentQuestion.render());
+
+                        $("#question_box td").on("click", function (ev) {
+                            console.log("IN event handling");
+                            ev = $(ev.target);
+                            var answer = ev.attr("id");
+                            ev.css("background-color", "rgba(133, 133, 133, 0.5");
+                        });
                     });
                 });
 
@@ -65,18 +72,7 @@ var a = (function ($) {
                     gameStarter = new StartGame()
                     gameStarter.stopGame();
                 });
-
-                console.log("before event handling");
-                $("#question_box td").on("click", function (ev) {
-                    console.log("IN event handling");
-
-                    var answer = ev.target.id;
-
-                    ev.css("background-color", "rgba(133, 133, 133, 0.5)");
-                });
             });
-
-           
         }
 
     });
