@@ -20,8 +20,8 @@ $(document).ready(function() {
     'use strict';
 
     console.log("site controller");
-    var gameRenderer = new Renderer();
-    var gameStarter = new StartGame();
+    var gameRenderer = new GameRenderer.Renderer();
+    var gameFiled = new QuizGame.GameField();
     gameRenderer.renderWelcome();
 
     $("#new_game").on('click', function () {
@@ -49,6 +49,7 @@ $(document).ready(function() {
     });
 
     var player;
+    var dummyPlayer;
     /// 1. init player - choose nickname
     var nickname = "";
     $("#nickname-button").on("click", function () {
@@ -58,8 +59,8 @@ $(document).ready(function() {
             $("#wrapper").fadeIn(1000)
         })
         .then(function () {
-            player = new Player(nickname);
-            var dummyPlayer = new DummyPlayer();
+            player = new QuizGame.Player(nickname);
+            dummyPlayer = new QuizGame.DummyPlayer();
 
             $("#player").append(player.render("player_child"));
             $("#dummy_player").html(dummyPlayer.render("dummy_child"));
