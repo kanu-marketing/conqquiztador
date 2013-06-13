@@ -16,20 +16,35 @@
 var a = (function ($) {
 
     var SiteController = Class.create({
-        initialize: function (player, dummyPlayer) {
+        initialize: function () {
             this.field = new QuizGame.GameField();
-            this.player = player;
-            this.dummyPlayer = dummyPlayer;
+            this.player = new QuizGame.Player;
+            this.dummyPlayer = new QuizGame.DummyPlayer;
+            this.renderer = new GameRenderer.Renderer();
+            this.currentQuestion;
         },
         startGame: function () {
-            console.log("site controller");
-            var gameRenderer = new GameRenderer.Renderer();
-            var gameFiled = new QuizGame.GameField();
+            var self = this;
+            var nickname = "";
+            //this.renderer.renderWelcome();
 
-            gameRenderer.renderWelcome();
+            //$("#nickname-button").on("click", function () {
+            //    nickname = document.getElementById("nickname").value;
+            //    $("#welcome-screen").fadeOut(1000).promise()
+            //    .then(function () {
+            //        $("#wrapper").fadeIn(1000)
+            //    })
+            //    .then(function () {
+            //        this.player = new QuizGame.Player(nickname);
+            //        this.dummyPlayer = new QuizGame.DummyPlayer();
+
+            //        $("#player").append(this.player.render("player_child"));
+            //        $("#dummy_player").html(this.dummyPlayer.render("dummy_child"));
+            //    });
+            //});
 
             $("#new_game").on('click', function () {
-               this.field.startNewGame();
+                self.field.startNewGame();
 
                 $(".flags").on('click', function () {
                     $("#" + this.id).hide();
@@ -39,10 +54,10 @@ var a = (function ($) {
                         var questionsNumber = data.length;
 
                         var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
-                        var question = QuestionParser.parseMultipleChoiceQuestion(data[index]);
+                        self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
 
                         // TODO: check if question is has been already shown
-                        $("#mc-question-container").html(question.render());
+                        $("#mc-question-container").html(self.currentQuestion.render());
                     });
                 });
 
@@ -50,25 +65,20 @@ var a = (function ($) {
                     gameStarter = new StartGame()
                     gameStarter.stopGame();
                 });
-            });
 
-            var nickname = "";
-            $("#nickname-button").on("click", function () {
-                nickname = document.getElementById("nickname").value;
-                $("#welcome-screen").fadeOut(1000).promise()
-                .then(function () {
-                    $("#wrapper").fadeIn(1000)
-                })
-                .then(function () {
-                    this.player = new QuizGame.Player(nickname);
-                    this.dummyPlayer = new QuizGame.DummyPlayer();
+                console.log("before event handling");
+                $("#question_box td").on("click", function (ev) {
+                    console.log("IN event handling");
 
-                    $("#player").append(this.player.render("player_child"));
-                    $("#dummy_player").html(this.dummyPlayer.render("dummy_child"));
+                    var answer = ev.target.id;
+
+                    ev.css("background-color", "rgba(133, 133, 133, 0.5)");
                 });
             });
+
+           
         }
-        
+
     });
 
     return {
@@ -87,55 +97,55 @@ var a = (function ($) {
 //    var siteControler = new a.SiteController(field, player, dummyPlayer);
 
 //    siteControler.startGame();
-    
 
-    //console.log("asd");
-    //console.log(player.name);
-    //var startGamePromise = function () {
-    //};
-    //var chooseFieldPromise = function () {
-    //    var deferredChoise = Q.defer();
-    //    deferredChoise.resolve(GameField.choose());// choose should return game filed (ev.target)
-    //    return deferredChoise.promise;
-    //};
-    //var getQuestionPromise = function (questionType) {
-    //    var deferredQuestion = Q.defer();
-    //    deferredQuestion.resolve(Question.getQuestion(questionType));
-    //    return deferredQuestion.promise;
-    //};
-    //var getUserAnswerPromise = function () {
-    //    var deferredUserAnswer = Q.defer();
-    //    deferredUserAnswer.resolve(HumanPlayer.getAnswer());
-    //    return deferredUserAnswer.promise;
-    //};
-    //var getPCAnswerPromise = function () {
-    //    var deferredUserAnswer = Q.defer();
-    //    deferredUserAnswer.resolve(HumanPlayer.getAnswer());
-    //    return deferredUserAnswer.promise;
-    //};
-    //var displayQuestionPromise = function (question) {
-    //    var deferredDisplay = Q.defer();
-    //    if(!question){
-    //        deferredDisplay.reject("No available question");
-    //    }
-    //    deferredDisplay.resolve(Renderer.displayQuestion(question));
-    //    return deferredDisplay.promise;
-    //}
-    //startGamePromise()
-    //.than(chooseFieldPromise, function (error) {
-    //    console.log(error.message)
-    //})
-    //.than(getQuestionPromise(typeABC))
-    //.than(displayQuestionPromise)
-    //.than(getUserAnswerPromise)
-    //.than(getPCAnswerPromise)
-    //.than(getRightAnswer)
-    //.than(getRoundWinnder, function () {
-    //    getQuestionPromise(type123)
-    //    .than(getUserAnswerPromise)
-    //    .than(getPCAnswerPromise)
-    //    .than(getRightAnswer)
-    //    .than(getRoundWinnder)
-    //})
-    //.than(getRoundWinner);
+
+//console.log("asd");
+//console.log(player.name);
+//var startGamePromise = function () {
+//};
+//var chooseFieldPromise = function () {
+//    var deferredChoise = Q.defer();
+//    deferredChoise.resolve(GameField.choose());// choose should return game filed (ev.target)
+//    return deferredChoise.promise;
+//};
+//var getQuestionPromise = function (questionType) {
+//    var deferredQuestion = Q.defer();
+//    deferredQuestion.resolve(Question.getQuestion(questionType));
+//    return deferredQuestion.promise;
+//};
+//var getUserAnswerPromise = function () {
+//    var deferredUserAnswer = Q.defer();
+//    deferredUserAnswer.resolve(HumanPlayer.getAnswer());
+//    return deferredUserAnswer.promise;
+//};
+//var getPCAnswerPromise = function () {
+//    var deferredUserAnswer = Q.defer();
+//    deferredUserAnswer.resolve(HumanPlayer.getAnswer());
+//    return deferredUserAnswer.promise;
+//};
+//var displayQuestionPromise = function (question) {
+//    var deferredDisplay = Q.defer();
+//    if(!question){
+//        deferredDisplay.reject("No available question");
+//    }
+//    deferredDisplay.resolve(Renderer.displayQuestion(question));
+//    return deferredDisplay.promise;
+//}
+//startGamePromise()
+//.than(chooseFieldPromise, function (error) {
+//    console.log(error.message)
+//})
+//.than(getQuestionPromise(typeABC))
+//.than(displayQuestionPromise)
+//.than(getUserAnswerPromise)
+//.than(getPCAnswerPromise)
+//.than(getRightAnswer)
+//.than(getRoundWinnder, function () {
+//    getQuestionPromise(type123)
+//    .than(getUserAnswerPromise)
+//    .than(getPCAnswerPromise)
+//    .than(getRightAnswer)
+//    .than(getRoundWinnder)
+//})
+//.than(getRoundWinner);
 //}(jQuery));
