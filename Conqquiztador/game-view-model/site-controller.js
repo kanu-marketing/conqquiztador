@@ -28,7 +28,7 @@ var a = (function ($) {
 
             var getQuestionPromise = function () {
                 var deferredQuestion = Q.defer();
-                
+
                 $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
                     var questionsNumber = data.length;
 
@@ -52,7 +52,7 @@ var a = (function ($) {
                     console.log("IN event handling");
                     ev = $(ev.target);
                     answer = ev.attr("id");
-                    ev.css("background-color", "rgba(133, 133, 133, 0.5");
+                    ev.css("background-color", "rgba(133, 133, 133, 0.5)");
                     deferred.resolve(answer);
                 });
 
@@ -75,6 +75,11 @@ var a = (function ($) {
             //    });
             //});
 
+            $("#stop_game").click(function () {
+                gameStarter = new StartGame()
+                gameStarter.stopGame();
+            });
+
             $("#new_game").on('click', function () {
                 self.field.startNewGame();
 
@@ -91,11 +96,6 @@ var a = (function ($) {
                     .then(function (dummyAnswer) {
                         //console.log(dummyAnswer);
                     });
-                });
-
-                $("#stop_game").click(function () {
-                    gameStarter = new StartGame()
-                    gameStarter.stopGame();
                 });
             });
         }
