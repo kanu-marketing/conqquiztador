@@ -53,54 +53,45 @@
             $("#new_game").on('click', function () {
                 gameStarter = gameStarter.startNewGame();
 
-            $('#mouse_pointer').on('hover', function () {
-             $(this).css('cursor','pointer');
-             }, function() {
-             $(this).css('cursor','auto');
+                $(".flags").on('click', function () {
+                    $("#" + this.id).hide();
+                    $("#red_" + this.id).show();
+
+                    $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
+                            var questionsNumber = data.length;
+
+                            var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
+                            var question = QuestionParser.parseMultipleChoiceQuestion(data[index]);
+
+                            // TODO: check if question is has been already shown
+                            $("#mc-question-container").html(question.render());
+
+                        });
+                    });
+
+                $("#stop_game").click(function() {
+                    gameStarter = new StartGame()
+                    gameStarter.stopGame();
+                });                       
             });
 
+            var nickname = "";
+            $("#nickname-button").on("click", function () {
+                nickname = document.getElementById("nickname").value;
+                $("#welcome-screen").fadeOut(1000).promise()
+                    .then(function () {
+                        $("#wrapper").fadeIn(1000)
+                    })
+                    .then(function () {
+                        var player = new Player(nickname);
+                        var dummyPlayer = new DummyPlayer();
 
-            $(".flags").on('click', function () {
-                $("#" + this.id).hide();
-                $("#red_" + this.id).show();
+                        $("#player").append(player.render("player_child"));
+                        $("#dummy_player").html(dummyPlayer.render("dummy_child"));
 
-                $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
-                    var questionsNumber = data.length;
-
-                    var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
-                    var question = QuestionParser.parseMultipleChoiceQuestion(data[index]);
-
-                    // TODO: check if question is has been already shown
-                    $("#mc-question-container").html(question.render());
-
-                });
+                    });
             });
-
-            $("#stop_game").click(function() {
-                gameStarter = new StartGame()
-                gameStarter.stopGame();
-            });                       
-        });
-
-
-
-        var nickname = "";
-        $("#nickname-button").on("click", function () {
-            nickname = document.getElementById("nickname").value;
-            $("#welcome-screen").fadeOut(1000).promise()
-                .then(function () {
-                    $("#wrapper").fadeIn(1000)
-                })
-                .then(function () {
-                    var player = new Player(nickname);
-                    var dummyPlayer = new DummyPlayer();
-
-                    $("#player").append(player.render("player_child"));
-                    $("#dummy_player").html(dummyPlayer.render("dummy_child"));
-
-                });
-        });
-    }(jQuery));
+        }(jQuery));
     </script>
 </body>
 </html>
