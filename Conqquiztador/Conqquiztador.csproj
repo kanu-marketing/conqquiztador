@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="game-view-model\game-field.js" />
+    <Content Include="game-view-model\game-renderer.js" />
     <Content Include="game-view-model\players.js" />
     <Content Include="game-view-model\question-parser.js" />
     <Content Include="game-view-model\question.js" />
