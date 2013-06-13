@@ -1,6 +1,5 @@
 ﻿/// <reference path="../scripts/jquery-1.10.0.js" />
 /// <reference path="../scripts/prototype.js" />
-
 (function ($) {
     var DUMMY_PLAYER_NAMES = ["Shrek", "Fionna", "Donald", "Bugs", "Spongebob"];
 
