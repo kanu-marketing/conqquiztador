@@ -46,10 +46,7 @@
     <script src="game-view-model/renderer.js"></script>
     <script>
         (function ($) {
-            var player;
-            var dummyPlayer;
-            var field;
-            var siteControler = new a.SiteController(field, player, dummyPlayer);
+            var siteControler = new a.SiteController();
             siteControler.startGame();
         }(jQuery));
     </script>

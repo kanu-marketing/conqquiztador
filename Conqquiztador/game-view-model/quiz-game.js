@@ -118,7 +118,7 @@ var QuizGame = (function ($) {
             this._choices = choices;
         },
         render: function () {
-            var container = $("<table class=" + MULTIPLE_CHOICE_CLASS + "'></table>");
+            var container = $("<table class='multiple-question'></table>");
 
             var task = "<tr><th colspan ='2'>" + this.task + "</td></tr>";
             container.append(task);

@@ -20,7 +20,7 @@ body {
 }
 
 #wrapper {
-    display: none;
+    /*display: none;*/
 }
 
 #game_field, #question_box, #player, #dummy_player, #welcome-screen {
