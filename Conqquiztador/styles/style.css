@@ -1,11 +1,6 @@
-﻿html, body, h1, form, fieldset, legend, ol, li
- 
-{
- 
+﻿html, body, h1, form, fieldset, legend, ol, li {
     margin: 0;
- 
     padding: 0;
- 
 }
 
 .player_id {
@@ -118,7 +113,7 @@ body {
 
 /*Welcome screen styles*/
 #welcome-screen {
-    margin: 15px auto;
+    margin: 150px auto;
     width: 500px;
     height: 350px;
     text-align: center;
@@ -216,20 +211,20 @@ body {
     padding-top: 0px;
     padding-left: 0px;
     height: 10px;
-    width:100%;
+    width: 100%;
 }
 
 #game_field button {
     background: #384313;
     border: 1px solid #ffffff;
-    border-radius: 5px; 
-    color: #ffffff; 
+    border-radius: 5px;
+    color: #ffffff;
     display: inline-block;
-    font: 14px Georgia, "Times New Roman", Times, serif; 
-    letter-spacing: 1px; 
-    margin: 7px 0px 30px 7px; 
+    font: 14px Georgia, "Times New Roman", Times, serif;
+    letter-spacing: 1px;
+    margin: 7px 0px 30px 7px;
     padding: 7px 7px;
-    text-shadow: 0 1px 1px #000000; 
+    text-shadow: 0 1px 1px #000000;
     text-transform: uppercase;
 }
 /*End of navigation styles*/

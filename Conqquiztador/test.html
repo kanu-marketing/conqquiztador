@@ -30,15 +30,23 @@
     </div>
     <script>
         (function ($) {
-            var player = new Player("Robocop");
-            $("#wrapper").append($("<p></p>").append(player.name + " - " + player.points + "points"));
             var dummyPlayer = new DummyPlayer("Robocop")
-            $("#wrapper").append($("<p></p>").append(dummyPlayer.name + " -> " + dummyPlayer.points));
-            $("#wrapper").append($("<p></p>").append(dummyPlayer.getMultipleQuestionAnswer()));
+            var saQuestion = new ShortAnswerQuestion("Test", 1111, 1111, 1112);
+            var mcQuestion = new MultipleChoiceQuestion("Test", 3, ["a", "a", "a", "a"]);
 
-            for (var i = 0; i < player.flags.length; i++) {
-                $("body").append($("<p></p>").append(player.name + " -> " + player.flags[i]));
-            }
+            var saAnswer = dummyPlayer.getShortQuestionAnswer(saQuestion);
+            var mcAnswer = dummyPlayer.getMultipleQuestionAnswer();
+            alert(saAnswer);
+
+            //var player = new Player("Robocop");
+            //$("#wrapper").append($("<p></p>").append(player.name + " - " + player.points + "points"));
+
+            //$("#wrapper").append($("<p></p>").append(dummyPlayer.name + " -> " + dummyPlayer.points));
+            //$("#wrapper").append($("<p></p>").append(dummyPlayer.getMultipleQuestionAnswer()));
+
+            //for (var i = 0; i < player.flags.length; i++) {
+            //    $("body").append($("<p></p>").append(player.name + " -> " + player.flags[i]));
+            //}
 
             //var possibleAnswers = ["Yes", "May be yes", "No", "Absolutely no"];
             //var mcQuestion = new MultipleChoiceQuestion("Do aliens exist?", "Yes, they do!", possibleAnswers);
@@ -78,7 +86,7 @@
             var nickname = "";
             $("#nickname-button").on("click", function () {
                 nickname = document.getElementById("nickname").value;
-                $("#welcome-screen").fadeOut(2000).promise().then(function(){
+                $("#welcome-screen").fadeOut(2000).promise().then(function () {
                     $("#wrapper").fadeIn(2000);
                 });
             });

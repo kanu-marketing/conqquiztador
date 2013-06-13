@@ -1,24 +1,35 @@
 ﻿/// <reference path="../scripts/jquery-1.10.0.js" />
 /// <reference path="../scripts/prototype.js" />
+
 (function ($) {
 
     var CHOICES_ROWS_COUNT = 2;
+    var MULTIPLE_CHOICE_CLASS = "multiple-question";
+    var SHORT_ANSWER_CLASS = "short-question";
+    var SHORT_ANSWER_ID = "sq-answer";
+    var SHORT_ANSWER_SUBMIT_ID = "sq-submit";
 
     this.Question = Class.create({
         initialize: function (task, answer) {
             this.task = task;
-            this.answer = answer;
+            this._answer = answer;
+        },
+        checkAnswer: function (inputAnswer) {
+            if (inputAnswer === this._answer) {
+                return true;
+            }
+
+            return false;
         }
     });
-
 
     this.MultipleChoiceQuestion = Class.create(Question, {
         initialize: function ($super, task, answer, choices) {
             $super(task, answer);
-            this.choices = choices;
+            this._choices = choices;
         },
         render: function () {
-            var container = $("<table class='multiple-question'></table>");
+            var container = $("<table class=" + MULTIPLE_CHOICE_CLASS + "'></table>");
 
             var task = "<tr><th colspan ='2'>" + this.task + "</td></tr>";
             container.append(task);
@@ -29,11 +40,11 @@
 
                 var firstCell = $("<td></td>");
                 firstCell.attr("id", counter);
-                firstCell.append(counter + ". " + this.choices[counter - 1]);
+                firstCell.append(counter + ". " + this._choices[counter - 1]);
 
                 var secondCell = $("<td></td>");
                 secondCell.attr("id", counter + 1);
-                secondCell.append(counter + 1 + ". " + this.choices[counter]);
+                secondCell.append(counter + 1 + ". " + this._choices[counter]);
 
                 row.append(firstCell, secondCell);
 
@@ -44,20 +55,19 @@
         }
     });
 
-
     this.ShortAnswerQuestion = Class.create(Question, {
         initialize: function ($super, task, answer, downLimit, upLimit) {
             $super(task, answer);
-            this.upLimit = upLimit;
-            this.downLimit = downLimit;
+            this._upLimit = upLimit;
+            this._downLimit = downLimit;
         },
         render: function () {
-            var container = $("<div class='short-question'></div>");
+            var container = $("<div class='" + SHORT_ANSWER_CLASS + "'></div>");
             var task = "<p>" + this.task + "</p>";
 
             var form = $("<form></form>");
-            var input = "<input type='text' id='sq-answer' /><br />";
-            var submit = "<input type='button' id='sq-submit' value='Submit Answer' />";
+            var input = "<input type='text' id='" + SHORT_ANSWER_ID + "' /><br />";
+            var submit = "<input type='button' id='" + SHORT_ANSWER_SUBMIT_ID + "' value='Submit Answer' />";
             form.append(input, submit);
 
             container.append(task, form);
