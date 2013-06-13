@@ -14,7 +14,6 @@
 /// . repeat 2. until all fields are taken
 
 var a = (function ($) {
-
     var SiteController = Class.create({
         initialize: function () {
             this.field = new QuizGame.GameField();
@@ -24,6 +23,29 @@ var a = (function ($) {
             this.currentQuestion;
         },
         startGame: function () {
+            var getQuestionPromise = function () {
+                var deferredQuestion = Q.defer();
+                var answer = "";
+                $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
+                    var questionsNumber = data.length;
+
+                    var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
+                    self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
+
+                    // TODO: check if question is has been already shown
+                    $("#mc-question-container").html(self.currentQuestion.render());
+
+                    $("#question_box td").on("click", function (ev) {
+                        console.log("IN event handling");
+                        ev = $(ev.target);
+                        answer = ev.attr("id");
+                        ev.css("background-color", "rgba(133, 133, 133, 0.5");
+                    });
+                });
+                deferredQuestion.resolve(answer);
+                return deferredQuestion.promise;
+            };
+
             var self = this;
             var nickname = "";
             //this.renderer.renderWelcome();
@@ -49,22 +71,27 @@ var a = (function ($) {
                 $(".flags").on('click', function () {
                     $("#" + this.id).hide();
                     $("#red_" + this.id).show();
-
-                    $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
-                        var questionsNumber = data.length;
-
-                        var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
-                        self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
-
-                        // TODO: check if question is has been already shown
-                        $("#mc-question-container").html(self.currentQuestion.render());
-
-                        $("#question_box td").on("click", function (ev) {
-                            console.log("IN event handling");
-                            ev = $(ev.target);
-                            var answer = ev.attr("id");
-                            ev.css("background-color", "rgba(133, 133, 133, 0.5");
-                        });
+                    //$.getJSON("model/bd-multiple-choice-questions.js", function (data) {
+                    //    var questionsNumber = data.length;
+                    //    var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
+                    //    self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
+                    //    // TODO: check if question is has been already shown
+                    //    $("#mc-question-container").html(self.currentQuestion.render());
+                    //    $("#question_box td").on("click", function (ev) {
+                    //        console.log("IN event handling");
+                    //        ev = $(ev.target);
+                    //        var answer = ev.attr("id");
+                    //        ev.css("background-color", "rgba(133, 133, 133, 0.5");
+                    //    });
+                    //});
+                    getQuestionPromise
+                    .then(function (answer) {
+                        var dummyAnswer = self.dummyPlayer.getMultipleQuestionAnswer();
+                        alert(dummyAnswer);
+                        return dummyAnswer;
+                    })
+                    .then(function (dummyAnswer) {
+                        console.log(dummyAnswer);
                     });
                 });
 
@@ -81,7 +108,6 @@ var a = (function ($) {
         SiteController: SiteController
     }
 }(jQuery));
-
 //(function () {
 //$(document).ready(function () {
 
