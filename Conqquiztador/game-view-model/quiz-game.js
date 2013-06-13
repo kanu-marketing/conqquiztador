@@ -10,7 +10,7 @@ var QuizGame = (function ($) {
     var SHORT_ANSWER_ID = "sq-answer";
     var SHORT_ANSWER_SUBMIT_ID = "sq-submit";
 
-    var StartGame = Class.create({
+    var GameField = Class.create({
         initialize: function () {
 
         },
@@ -166,6 +166,7 @@ var QuizGame = (function ($) {
     });
 
     return {
+        GameField: GameField,
         MultipleChoiceQuestion: MultipleChoiceQuestion,
         ShortAnswerQuestion: ShortAnswerQuestion,
         Player: Player,
