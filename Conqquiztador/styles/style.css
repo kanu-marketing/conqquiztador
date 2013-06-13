@@ -1,4 +1,14 @@
-﻿.player_id {
+﻿html, body, h1, form, fieldset, legend, ol, li
+ 
+{
+ 
+    margin: 0;
+ 
+    padding: 0;
+ 
+}
+
+.player_id {
     zoom: 1;
 }
 
@@ -209,17 +219,18 @@ body {
     width:100%;
 }
 
-#navigation button {
-    border: 1px;
-    background-color: rgb(255, 106, 0);
-    padding-top: 0px;
-    padding-left: 0px;
-    margin-top: 0px;
-    margin-left: 0px;
-    height: 100%;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
+#game_field button {
+    background: #384313;
+    border: 1px solid #ffffff;
+    border-radius: 5px; 
+    color: #ffffff; 
+    display: inline-block;
+    font: 14px Georgia, "Times New Roman", Times, serif; 
+    letter-spacing: 1px; 
+    margin: 7px 0px 30px 7px; 
+    padding: 7px 7px;
+    text-shadow: 0 1px 1px #000000; 
+    text-transform: uppercase;
 }
 /*End of navigation styles*/
 

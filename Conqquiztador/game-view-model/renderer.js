@@ -24,10 +24,10 @@
         },
         renderNavigation: function () {
             var container = $("<div id='navigation' class='container'></div>");
-            container.append("<button id='new_game'>Start Game</button>");
+            container.append("<button id='start_game'>Start Game</button>");
             container.append("<button id='stop_game'>Stop Game</button>");
             container.append("<button id='help'>Help</button>");
-            $("#mouse_pointer").append(container);
+            $("body").append(container);
         }
     });
 
