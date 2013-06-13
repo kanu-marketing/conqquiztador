@@ -47,18 +47,75 @@ var a = (function ($) {
             var getPlayerAnswerPromise = function () {
                 var deferred = Q.defer();
                 var answer = "";
-
+                
                 $("#question_box td").on("click", function (ev) {
-                    console.log("IN event handling");
                     ev = $(ev.target);
                     answer = ev.attr("id");
                     ev.css("background-color", "rgba(133, 133, 133, 0.5)");
                     deferred.resolve(answer);
                 });
 
+                setTimeout(function () {
+                    if (answer == "") {
+                        var randomId = Math.floor((Math.random() * 10) % 4) + 1;
+                        $("td#" + randomId).css("background-color", "rgba(133, 133, 133, 0.5)");
+                        deferred.resolve(randomId);
+                    }
+                }, 1000); // Time to answer
+                
                 return deferred.promise;
             };
-            //this.renderer.renderWelcome();
+
+            var getAnswersPromise = function (answer) {
+                var deferred = Q.defer();
+
+                var dummyAnswer = self.dummyPlayer.getMultipleQuestionAnswer();
+                var rightAnswer = self.currentQuestion.answer();
+                setTimeout(function () {
+                    $("td#" + dummyAnswer).css("background-color", "rgba(233, 33, 133, 0.5)");
+                }, 1000);
+                setTimeout(function () {
+                    $("td#" + rightAnswer).css("background-color", "rgba(0, 255, 0, 0.5)");
+                }, 1000);
+
+                var answers = {
+                    "player": answer,
+                    "dummy": dummyAnswer,
+                    "correct": rightAnswer
+                };
+
+                deferred.resolve(answers);
+
+                return deferred.promise;
+            }
+
+            var getWinnerPromise = function (answers) {
+                var deferred = Q.defer();
+
+                //console.log(answers.player);
+                //console.log(answers.dummy);
+                //console.log(answers.correct);
+
+                if (answers.player != answers.dummy) {
+                    if (answers.player == answers.correct) {
+                        deferred.resolve("player");
+                    }
+                    else {
+                        if (answers.dummy == answers.correct) {
+                            deferred.resolve("dummy");
+                        }
+                        else {
+                            deferred.reject("rematch");
+                        }
+                    }
+                }
+                else {
+                    deferred.reject("rematch");
+                }
+                return deferred.promise;
+            };
+
+            //self.renderer.renderWelcome();
 
             //$("#nickname-button").on("click", function () {
             //    nickname = document.getElementById("nickname").value;
@@ -88,14 +145,15 @@ var a = (function ($) {
                     $("#red_" + this.id).show();
                     getQuestionPromise()
                     .then(getPlayerAnswerPromise)
-                    .then(function (answer) {
-                        console.log(answer);
-                        var dummyAnswer = self.dummyPlayer.getMultipleQuestionAnswer();
-                        return dummyAnswer;
-                    })
-                    .then(function (dummyAnswer) {
-                        //console.log(dummyAnswer);
-                    });
+                    .then(getAnswersPromise)
+                    .then(getWinnerPromise)
+                    .then(function (winner) {
+                        console.log(winner);
+                    },
+                          function (rematch) {
+                              console.log(rematch);
+                          }
+                    );
                 });
             });
         }
@@ -106,66 +164,3 @@ var a = (function ($) {
         SiteController: SiteController
     }
 }(jQuery));
-//(function () {
-//$(document).ready(function () {
-
-//    //window.addEventListener('load', function () {
-//    'use strict';
-//    var player;
-//    var dummyPlayer;
-//    var field;
-//    var siteControler = new a.SiteController(field, player, dummyPlayer);
-
-//    siteControler.startGame();
-
-
-//console.log("asd");
-//console.log(player.name);
-//var startGamePromise = function () {
-//};
-//var chooseFieldPromise = function () {
-//    var deferredChoise = Q.defer();
-//    deferredChoise.resolve(GameField.choose());// choose should return game filed (ev.target)
-//    return deferredChoise.promise;
-//};
-//var getQuestionPromise = function (questionType) {
-//    var deferredQuestion = Q.defer();
-//    deferredQuestion.resolve(Question.getQuestion(questionType));
-//    return deferredQuestion.promise;
-//};
-//var getUserAnswerPromise = function () {
-//    var deferredUserAnswer = Q.defer();
-//    deferredUserAnswer.resolve(HumanPlayer.getAnswer());
-//    return deferredUserAnswer.promise;
-//};
-//var getPCAnswerPromise = function () {
-//    var deferredUserAnswer = Q.defer();
-//    deferredUserAnswer.resolve(HumanPlayer.getAnswer());
-//    return deferredUserAnswer.promise;
-//};
-//var displayQuestionPromise = function (question) {
-//    var deferredDisplay = Q.defer();
-//    if(!question){
-//        deferredDisplay.reject("No available question");
-//    }
-//    deferredDisplay.resolve(Renderer.displayQuestion(question));
-//    return deferredDisplay.promise;
-//}
-//startGamePromise()
-//.than(chooseFieldPromise, function (error) {
-//    console.log(error.message)
-//})
-//.than(getQuestionPromise(typeABC))
-//.than(displayQuestionPromise)
-//.than(getUserAnswerPromise)
-//.than(getPCAnswerPromise)
-//.than(getRightAnswer)
-//.than(getRoundWinnder, function () {
-//    getQuestionPromise(type123)
-//    .than(getUserAnswerPromise)
-//    .than(getPCAnswerPromise)
-//    .than(getRightAnswer)
-//    .than(getRoundWinnder)
-//})
-//.than(getRoundWinner);
-//}(jQuery));

@@ -2,7 +2,6 @@
 /// <reference path="../scripts/prototype.js" />
 /// 
 var QuizGame = (function ($) {
-
     var DUMMY_PLAYER_NAMES = ["Shrek", "Fionna", "Donald", "Bugs", "Spongebob"];
     var CHOICES_ROWS_COUNT = 2;
     var MULTIPLE_CHOICE_CLASS = "multiple-question";
@@ -12,7 +11,6 @@ var QuizGame = (function ($) {
 
     var GameField = Class.create({
         initialize: function () {
-
         },
         startNewGame: function () {
             $("#mouse_pointer").empty();
@@ -104,11 +102,14 @@ var QuizGame = (function ($) {
             this._answer = answer;
         },
         checkAnswer: function (inputAnswer) {
-            if (inputAnswer === this._answer) {
+            if (inputAnswer == this._answer) {
                 return true;
             }
 
             return false;
+        },
+        answer: function () {
+            return this._answer;
         }
     });
 
@@ -122,7 +123,6 @@ var QuizGame = (function ($) {
 
             var task = "<tr><th colspan ='2'>" + this.task + "</td></tr>";
             container.append(task);
-
 
             for (var i = 1, counter = 1; i <= CHOICES_ROWS_COUNT; i += 1, counter += 2) {
                 var row = $("<tr></tr>");
