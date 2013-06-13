@@ -23,9 +23,12 @@ var a = (function ($) {
             this.currentQuestion;
         },
         startGame: function () {
+            var self = this;
+            var nickname = "";
+
             var getQuestionPromise = function () {
                 var deferredQuestion = Q.defer();
-                var answer = "";
+                
                 $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
                     var questionsNumber = data.length;
 
@@ -34,20 +37,27 @@ var a = (function ($) {
 
                     // TODO: check if question is has been already shown
                     $("#mc-question-container").html(self.currentQuestion.render());
-
-                    $("#question_box td").on("click", function (ev) {
-                        console.log("IN event handling");
-                        ev = $(ev.target);
-                        answer = ev.attr("id");
-                        ev.css("background-color", "rgba(133, 133, 133, 0.5");
-                    });
                 });
-                deferredQuestion.resolve(answer);
+                setTimeout(function () {
+                    deferredQuestion.resolve();
+                }, 100);
                 return deferredQuestion.promise;
             };
 
-            var self = this;
-            var nickname = "";
+            var getPlayerAnswerPromise = function () {
+                var deferred = Q.defer();
+                var answer = "";
+
+                $("#question_box td").on("click", function (ev) {
+                    console.log("IN event handling");
+                    ev = $(ev.target);
+                    answer = ev.attr("id");
+                    ev.css("background-color", "rgba(133, 133, 133, 0.5");
+                    deferred.resolve(answer);
+                });
+
+                return deferred.promise;
+            };
             //this.renderer.renderWelcome();
 
             //$("#nickname-button").on("click", function () {
@@ -71,27 +81,15 @@ var a = (function ($) {
                 $(".flags").on('click', function () {
                     $("#" + this.id).hide();
                     $("#red_" + this.id).show();
-                    //$.getJSON("model/bd-multiple-choice-questions.js", function (data) {
-                    //    var questionsNumber = data.length;
-                    //    var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
-                    //    self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
-                    //    // TODO: check if question is has been already shown
-                    //    $("#mc-question-container").html(self.currentQuestion.render());
-                    //    $("#question_box td").on("click", function (ev) {
-                    //        console.log("IN event handling");
-                    //        ev = $(ev.target);
-                    //        var answer = ev.attr("id");
-                    //        ev.css("background-color", "rgba(133, 133, 133, 0.5");
-                    //    });
-                    //});
-                    getQuestionPromise
+                    getQuestionPromise()
+                    .then(getPlayerAnswerPromise)
                     .then(function (answer) {
+                        console.log(answer);
                         var dummyAnswer = self.dummyPlayer.getMultipleQuestionAnswer();
-                        alert(dummyAnswer);
                         return dummyAnswer;
                     })
                     .then(function (dummyAnswer) {
-                        console.log(dummyAnswer);
+                        //console.log(dummyAnswer);
                     });
                 });
 
