@@ -1,32 +1,32 @@
 ﻿<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Conqquiztador</title>
-        <link rel="stylesheet" type="text/css" href="styles/style.css">
-        <script src="scripts/jquery-1.10.0.js"></script>
-        <script src="scripts/prototype.js"></script>
-        <script src="scripts/q.js"></script>
-        <script src="game-view-model/quiz-game.js"></script>
-        <script src="game-view-model/game-renderer.js"></script>
-        <script src="game-view-model/site-controller.js"></script>
-    </head>
-    <body>
-        <div id="wrapper">
-            <div id="game_field" class="container">
-                <button id="new_game">Start game</button>
-                <button id="stop_game">Stop game</button>
-                <button id="help">Help</button>
-                <div id="mouse_pointer">
-                    <img id="flag" class="flags" src="images/red_flag.png" alt="Red flag">
-                </div>
+<head>
+    <title>Conqquiztador</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <script src="scripts/jquery-1.10.0.js"></script>
+    <script src="scripts/prototype.js"></script>
+    <script src="scripts/q.js"></script>
+    <script src="game-view-model/quiz-game.js"></script>
+    <script src="game-view-model/game-renderer.js"></script>
+    <script src="game-view-model/site-controller.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="game_field" class="container">
+            <button id="new_game">Start game</button>
+            <button id="stop_game">Stop game</button>
+            <button id="help">Help</button>
+            <div id="mouse_pointer">
+                <img id="flag" class="flags" src="images/red_flag.png" alt="Red flag">
             </div>
-            <div id="question_box" class="container">
-                <div id="question_child">
-                    <h3>Question</h3>
-                </div>
-                <div id="mc-question-container"></div>
+        </div>
+        <div id="question_box" class="container">
+            <div id="question_child">
+                <h3>Question</h3>
             </div>
-            <div id="player" class="container">
-                <!--<div class="player_id">
+            <div id="mc-question-container"></div>
+        </div>
+        <div id="player" class="container">
+            <!--<div class="player_id">
                 <div class="name">
                 <span>Player</span>
                 </div>
@@ -39,11 +39,19 @@
                 <p>All flags go here</p>
                 <p><span>new flag</span> <span>new flag</span> <span>new flag</span> </p>
                 </div>-->
-            </div>
-            <div id="dummy_player" class="container"></div>
         </div>
-        <script src="game-view-model/question.js"></script>
-        <script src="game-view-model/renderer.js"></script>
-    </body>
+        <div id="dummy_player" class="container"></div>
+    </div>
+    <script src="game-view-model/question.js"></script>
+    <script src="game-view-model/renderer.js"></script>
+    <script>
+        (function ($) {
+            var player;
+            var dummyPlayer;
+            var field;
+            var siteControler = new a.SiteController(field, player, dummyPlayer);
+            siteControler.startGame();
+        }(jQuery));
+    </script>
+</body>
 </html>
-        
