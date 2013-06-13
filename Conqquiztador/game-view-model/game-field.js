@@ -16,7 +16,6 @@
                     src: '../images/blue_flag.png' ,
                     alt: 'Blue Flag' 
                 });
-                console.log(fieldItem);
                 $("#mouse_pointer").append(fieldItem);
             }
 
@@ -28,12 +27,12 @@
                     alt: 'Red Flag',
                 });
                 redItem.hide();
-                console.log(redItem);
                 $("#mouse_pointer").append(redItem);
             }
         },
         stopGame: function () {
             $("#mouse_pointer").empty();
+            //$("#question_box").empty();
         }
     });
 
