@@ -24,9 +24,9 @@ body {
 
 #game_field {
     margin: auto;
-    margin-top: 15px;
+    margin-top: 50px;
     width: 70%;
-    height: 330px;
+    height: 150px;
 }
 
 #question_box {
@@ -55,7 +55,6 @@ body {
 }
 
 #mouse_pointer {
-    background-image: url('../images/world_map-for-web.png');
     width: 700px;
     height: 330px;
     margin: 2px;
@@ -104,14 +103,6 @@ body {
 .flags {
     height: 50px;
     width: 50px;
-}
-
-#flag1 {
-    padding-top: 30px;
-}
-
-#flag2 {
-    padding-top: 60px;
 }
 
 
@@ -208,5 +199,28 @@ body {
 }
 
 /*End of players styles*/
+
+/*Navigation styles*/
+#navigation {
+    background-color: rgba(0,0,0,0.3);
+    padding-top: 0px;
+    padding-left: 0px;
+    height: 10px;
+    width:100%;
+}
+
+#navigation button {
+    border: 1px;
+    background-color: rgb(255, 106, 0);
+    padding-top: 0px;
+    padding-left: 0px;
+    margin-top: 0px;
+    margin-left: 0px;
+    height: 100%;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+/*End of navigation styles*/
 
 
