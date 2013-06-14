@@ -133,16 +133,35 @@ var a = (function ($) {
             //});
 
             $("#stop_game").click(function () {
-                gameStarter = new StartGame()
-                gameStarter.stopGame();
+                self.field.stopGame();
             });
 
             $("#new_game").on('click', function () {
                 self.field.startNewGame();
 
+                var message = "Please, choise one of the blue flags";
+                $("#mouse_pointer").append("<p id='message'>" + message + "</p>");
+                var message_box = $("#message");
+
                 $(".flags").on('click', function () {
-                    $("#" + this.id).hide();
-                    $("#red_" + this.id).show();
+
+                    var correcrAnswer = true; //TODO: This will recieve information if the the answer is correct or incorrect
+                    message = "Answer the question before continue.";
+                    message_box.empty();
+                    message_box.append(message)
+
+                    if (correcrAnswer) {
+                        $(this).attr({
+                            "src": "images/green_flag.png",
+                            "alt": "Green flag"
+                        });
+                        message = "Answer is correct. Now choise again blue flag.";
+                        message_box.empty();
+                        message_box.append(message);
+                    } else {
+                        $(this).attr("src", "images/red_flag.png");
+                    }
+
                     getQuestionPromise()
                     .then(getPlayerAnswerPromise)
                     .then(getAnswersPromise)
@@ -157,7 +176,6 @@ var a = (function ($) {
                 });
             });
         }
-
     });
 
     return {
