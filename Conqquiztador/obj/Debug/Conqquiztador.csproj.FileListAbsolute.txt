@@ -3,3 +3,8 @@ C:\Users\Asinka\Documents\Visual Studio 2012\Projects\JS APIs\conqquiztador\Conq
 C:\Users\Asinka\Documents\Visual Studio 2012\Projects\JS APIs\conqquiztador\Conqquiztador\obj\Debug\Conqquiztador.csprojResolveAssemblyReference.cache
 C:\Users\Asinka\Documents\Visual Studio 2012\Projects\JS APIs\conqquiztador\Conqquiztador\obj\Debug\Conqquiztador.dll
 C:\Users\Asinka\Documents\Visual Studio 2012\Projects\JS APIs\conqquiztador\Conqquiztador\obj\Debug\Conqquiztador.pdb
+E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\bin\Conqquiztador.dll
+E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\bin\Conqquiztador.pdb
+E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\obj\Debug\Conqquiztador.csprojResolveAssemblyReference.cache
+E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\obj\Debug\Conqquiztador.dll
+E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\obj\Debug\Conqquiztador.pdb

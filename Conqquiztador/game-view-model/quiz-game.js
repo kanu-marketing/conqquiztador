@@ -8,36 +8,43 @@ var QuizGame = (function ($) {
     var SHORT_ANSWER_CLASS = "short-question";
     var SHORT_ANSWER_ID = "sq-answer";
     var SHORT_ANSWER_SUBMIT_ID = "sq-submit";
+    var NAME_CLASS = "name";
+    var POINTS_CLAS = "points";
+    var PLAYER_ID_CONTAINER_CLASS = "player-id";
+    var FLAGS_CONTAINER_ID = "flags-container";
+    var FLAG_CLASS = "flag";
+    var CHOICES_COUNT = 4;
 
     var GameField = Class.create({
         initialize: function () {
         },
-        startNewGame: function () {
-            $("#mouse_pointer").empty();
+        initializeFlags: function () {
+            var flagsContainer = $("<div id=" + FLAGS_CONTAINER_ID + "></div>");
             for (var i = 0; i < 10; i++) {
                 var fieldItem = $("<img>").attr({
                     id: "flag" + i,
-                    class: 'flags',
+                    class: FLAG_CLASS,
                     src: 'images/blue_flag.png',
                     alt: 'Blue Flag'
                 });
-                $("#mouse_pointer").append(fieldItem);
+                flagsContainer.append(fieldItem);
             }
 
-            for (var i = 0; i < 10; i++) {
+            for (i = 0; i < 10; i++) {
                 var redItem = $("<img>").attr({
                     id: "red_flag" + i,
-                    class: 'flags',
+                    class: FLAG_CLASS,
                     src: 'images/red_flag.png',
                     alt: 'Red Flag',
                 });
                 redItem.hide();
-                $("#mouse_pointer").append(redItem);
+                flagsContainer.append(redItem);
             }
+
+            return flagsContainer;
         },
-        stopGame: function () {
-            $("#mouse_pointer").empty();
-            //$("#question_box").empty();
+        clearFlags: function () {
+            $("#" + FLAGS_CONTAINER_ID).remove();
         }
     });
 
@@ -45,10 +52,9 @@ var QuizGame = (function ($) {
         initialize: function (name) {
             this._name = name;
             this._points = 0;
-            this._flags = [];
         },
-        addFlag: function (flag) {
-            this._flags.push(flag);
+        addPoints: function (points) {
+            this._points += points;
         },
         getName: function () {
             return this._name;
@@ -58,21 +64,10 @@ var QuizGame = (function ($) {
         },
         render: function () {
             var container = $("<div></div>");
-            var playerId = $("<div class='player_id'></div>");
-            playerId.append("<div class='name'>" + this._name + "</div>")
-            playerId.append("<div class='points'>" + this._points + "</div>")
+            var playerId = $("<div class=" + PLAYER_ID_CONTAINER_CLASS + "></div>");
+            playerId.append("<div class=" + NAME_CLASS + ">" + this._name + "</div>")
+            playerId.append("<div class=" + POINTS_CLAS + ">" + this._points + "</div>")
             container.append(playerId);
-
-            if (this._flags.length !== 0) {
-                var flagsContainer = $("<p class='player_flags'></p>");
-
-                for (var i = 0, len = this._flags.length; i < len; i += 1) {
-                    flagsContainer.append("<span>" + this._flags[i] + "; </span>");
-                    // TODO: change after flags implementation
-                }
-
-                container.append(flagsContainer);
-            }
 
             return container;
         }
@@ -84,7 +79,7 @@ var QuizGame = (function ($) {
             $super(DUMMY_PLAYER_NAMES[nameIndex]);
         },
         getMultipleQuestionAnswer: function () {
-            var answer = Math.floor((Math.random() * 10 + 1) % 4);
+            var answer = Math.floor((Math.random() * 10 + 1) % CHOICES_COUNT);
             return answer + 1;
         },
         getShortQuestionAnswer: function (question) {
@@ -119,7 +114,7 @@ var QuizGame = (function ($) {
             this._choices = choices;
         },
         render: function () {
-            var container = $("<table class='multiple-question'></table>");
+            var container = $("<table class=" + MULTIPLE_CHOICE_CLASS + "></table>");
 
             var task = "<tr><th colspan ='2'>" + this.task + "</td></tr>";
             container.append(task);
