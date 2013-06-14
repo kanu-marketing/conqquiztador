@@ -3,11 +3,11 @@
     padding: 0;
 }
 
-.player_id {
+.player-id, #question-label {
     zoom: 1;
 }
 
-    .player_id:after {
+    .player-id:after, #question-label:after {
         content: "";
         display: block;
         clear: both;
@@ -20,27 +20,21 @@ body {
 }
 
 #wrapper {
-    /*display: none;*/
+    display: none;
 }
 
-#game_field, #question_box, #player, #dummy_player, #welcome-screen {
+#game-field, #question-box, #player, #dummy-player, #welcome-screen {
     background-color: rgba(0,0,0,0.3);
 }
 
-#game_field {
+#game-field {
     margin: auto;
     margin-top: 50px;
     width: 70%;
     height: 150px;
 }
 
-#question_box {
-    margin: auto;
-    margin-top: 30px;
-    width: 50%;
-    min-height: 100px;
-    color: #6B6565;
-}
+
 
 #player {
     margin-left: 20%;
@@ -50,7 +44,7 @@ body {
     height: 100px;
 }
 
-#dummy_player {
+#dummy-player {
     margin-right: 20%;
     float: right;
     margin-top: 30px;
@@ -59,7 +53,7 @@ body {
     right: 50%;
 }
 
-#mouse_pointer {
+#flags-container {
     width: 700px;
     height: 330px;
     margin: 2px;
@@ -68,16 +62,11 @@ body {
     cursor: pointer;
 }
 
-#flag {
+.flag {
     position: relative;
-    visibility: hidden;
     z-index: 2;
     width: 50px;
     height: 50px;
-}
-
-#dummy_flag {
-    padding-left: 80px;
 }
 
 .container {
@@ -87,24 +76,6 @@ body {
     margin: 5px;
 }
 
-    .container #question_child {
-        background-color: green;
-    }
-
-
-
-    .container #field_child, .container #question_child, .container #player_child, .container #dummy_child {
-        float: left;
-        height: 40px;
-        width: 80px;
-        border-radius: 5px;
-        user-select: none;
-        text-align: center;
-        vertical-align: central;
-        color: white;
-        font-weight: bold;
-        text-align: center;
-    }
 
 .flags {
     height: 50px;
@@ -144,6 +115,20 @@ body {
 /*End of welcome screen styles*/
 
 /*Questions styles*/
+#question-box {
+    margin: auto;
+    margin-top: 30px;
+    width: 50%;
+    min-height: 100px;
+}
+
+#question-label {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: rgba(59,161,12,0.5);
+    float: left;
+}
+
 .multiple-question {
     margin-left: 100px;
     width: 500px;
@@ -196,19 +181,15 @@ body {
     background-color: rgba(255,216,0,0.5);
 }
 
-#dummy_player .name, #dummy_player .points {
+#dummy-player .name, #dummy-player .points {
     background-color: rgba(255,106,0,0.5);
-}
-
-.player_flags {
-    text-align: center;
 }
 
 /*End of players styles*/
 
 /*Navigation styles*/
 
-#game_field button {
+#game-field button {
     background: #384313;
     border: 1px solid #ffffff;
     border-radius: 5px;

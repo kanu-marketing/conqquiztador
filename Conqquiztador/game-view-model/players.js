@@ -2,15 +2,15 @@
 /// <reference path="../scripts/prototype.js" />
 (function ($) {
     var DUMMY_PLAYER_NAMES = ["Shrek", "Fionna", "Donald", "Bugs", "Spongebob"];
+    var NAME_CLASS = "name";
+    var POINTS_CLAS = "points";
+    var PLAYER_ID_CONTAINER_CLASS = "player_id";
+    var CHOICES_COUNT = 4;
 
     this.Player = Class.create({
         initialize: function (name) {
             this._name = name;
             this._points = 0;
-            this._flags = [];
-        },
-        addFlag: function (flag) {
-            this._flags.push(flag);
         },
         addPoints: function (points) {
             this._points += points;
@@ -23,21 +23,10 @@
         },
         render: function () {
             var container = $("<div></div>");
-            var playerId = $("<div class='player_id'></div>");
-            playerId.append("<div class='name'>" + this._name + "</div>")
-            playerId.append("<div class='points'>" + this._points + "</div>")
+            var playerId = $("<div class=" + PLAYER_ID_CONTAINER_CLASS + "></div>");
+            playerId.append("<div class=" + NAME_CLASS + ">" + this._name + "</div>")
+            playerId.append("<div class=" + POINTS_CLAS + ">" + this._points + "</div>")
             container.append(playerId);
-
-            if (this._flags.length !== 0) {
-                var flagsContainer = $("<p class='player_flags'></p>");
-
-                for (var i = 0, len = this._flags.length; i < len; i += 1) {
-                    flagsContainer.append("<span>" + this._flags[i] + "; </span>");
-                    // TODO: change after flags implementation
-                }
-
-                container.append(flagsContainer);
-            }
 
             return container;
         }
@@ -50,7 +39,7 @@
             $super(DUMMY_PLAYER_NAMES[nameIndex]);
         },
         getMultipleQuestionAnswer: function () {
-            var answer = Math.floor((Math.random() * 10 + 1) % 4);
+            var answer = Math.floor((Math.random() * 10 + 1) % CHOICES_COUNT);
             return answer + 1;
         },
         getShortQuestionAnswer: function (question) {

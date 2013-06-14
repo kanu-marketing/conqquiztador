@@ -24,7 +24,6 @@ var a = (function ($) {
         },
         startGame: function () {
             var self = this;
-            var nickname = "";
 
             var getQuestionPromise = function () {
                 var deferredQuestion = Q.defer();
@@ -36,7 +35,7 @@ var a = (function ($) {
                     self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
 
                     // TODO: check if question is has been already shown
-                    $("#mc-question-container").html(self.currentQuestion.render());
+                    $("#current-question").html(self.currentQuestion.render());
                 });
                 setTimeout(function () {
                     deferredQuestion.resolve();
@@ -65,7 +64,7 @@ var a = (function ($) {
                 
                 return deferred.promise;
             };
-
+            //this.renderer.renderNavigation();
             var getAnswersPromise = function (answer) {
                 var deferred = Q.defer();
 
@@ -115,35 +114,37 @@ var a = (function ($) {
                 return deferred.promise;
             };
 
-            //self.renderer.renderWelcome();
+            self.renderer.renderWelcome();
+            self.renderer.renderSkeleton();
 
-            //$("#nickname-button").on("click", function () {
-            //    nickname = document.getElementById("nickname").value;
-            //    $("#welcome-screen").fadeOut(1000).promise()
-            //    .then(function () {
-            //        $("#wrapper").fadeIn(1000)
-            //    })
-            //    .then(function () {
-            //        this.player = new QuizGame.Player(nickname);
-            //        this.dummyPlayer = new QuizGame.DummyPlayer();
+            $("#nickname-button").on("click", function () {
+                nickname = document.getElementById("nickname").value;
+                $("#welcome-screen").fadeOut(1000).promise()
+                .then(function () {
+                    $("#wrapper").fadeIn(1000)
+                })
+                .then(function () {
+                    this.player = new QuizGame.Player(nickname);
+                    this.dummyPlayer = new QuizGame.DummyPlayer();
 
-            //        $("#player").append(this.player.render("player_child"));
-            //        $("#dummy_player").html(this.dummyPlayer.render("dummy_child"));
-            //    });
-            //});
-
-            $("#stop_game").click(function () {
-                self.field.stopGame();
+                    $("#player").append(this.player.render());
+                    $("#dummy-player").html(this.dummyPlayer.render());
+                });
             });
 
-            $("#new_game").on('click', function () {
-                self.field.startNewGame();
+            $("#stop-game-btn").click(function () {
+                self.field.clearFlags();
+            });
+
+            $("#start-game-btn").on('click', function () {
+                var flags = self.field.initializeFlags();
+                self.renderer.renderFlags(flags);
 
                 var message = "Please, choise one of the blue flags";
-                $("#mouse_pointer").append("<p id='message'>" + message + "</p>");
+                $("#flags-container").append("<p id='message'>" + message + "</p>");
                 var message_box = $("#message");
 
-                $(".flags").on('click', function () {
+                $(".flag").on('click', function () {
 
                     var correcrAnswer = true; //TODO: This will recieve information if the the answer is correct or incorrect
                     message = "Answer the question before continue.";
