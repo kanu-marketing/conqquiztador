@@ -11,6 +11,7 @@ var GameRenderer = (function ($) {
     var WRAPPER_ID = "wrapper";
     var FIELD_ID = "game-field";
     var QUESTION_BOX_ID = "question-box";
+    var MESSAGE_BOX_ID = "message";
     var QEUSTION_LABEL_ID = "question-label"
     var CURRENT_QUESTION_ID = "current-question";
     var PLAYER_ID = "player"
@@ -41,6 +42,9 @@ var GameRenderer = (function ($) {
 
             var gameField = renderGameField();
             wrapper.append(gameField);
+
+            var messageBox = renderMessageBox();
+            wrapper.append(messageBox);
 
             var questionBox = renderQuestionBox();
             wrapper.append(questionBox);
@@ -80,6 +84,13 @@ var GameRenderer = (function ($) {
         container.append("<button id=" + START_ID + ">Start Game</button>");
         container.append("<button id=" + STOP_ID + ">Stop Game</button>");
         container.append("<button id=" + HELP_ID + ">Help</button>");
+
+        return container;
+    }
+
+    function renderMessageBox() {
+        var container = $("<div id=" + MESSAGE_BOX_ID + "></div>");
+        container.addClass(CONTAINER_CLASS);
 
         return container;
     }
