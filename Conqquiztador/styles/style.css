@@ -65,6 +65,7 @@ body {
     margin: 2px;
     margin-left: auto;
     margin-right: auto;
+    cursor: pointer;
 }
 
 #flag {
@@ -206,13 +207,6 @@ body {
 /*End of players styles*/
 
 /*Navigation styles*/
-#navigation {
-    background-color: rgba(0,0,0,0.3);
-    padding-top: 0px;
-    padding-left: 0px;
-    height: 10px;
-    width: 100%;
-}
 
 #game_field button {
     background: #384313;
@@ -228,5 +222,6 @@ body {
     text-transform: uppercase;
 }
 /*End of navigation styles*/
+
 
 
