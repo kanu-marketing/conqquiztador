@@ -9,15 +9,13 @@ var QuizGame = (function ($) {
     var SHORT_ANSWER_ID = "sq-answer";
     var SHORT_ANSWER_SUBMIT_ID = "sq-submit";
     var NAME_CLASS = "name";
-    var POINTS_CLAS = "points";
+    var POINTS_CLASS = "points";
     var PLAYER_ID_CONTAINER_CLASS = "player-id";
     var FLAGS_CONTAINER_ID = "flags-container";
     var FLAG_CLASS = "flag";
     var CHOICES_COUNT = 4;
 
     var GameField = Class.create({
-        initialize: function () {
-        },
         initializeFlags: function () {
             var flagsContainer = $("<div id=" + FLAGS_CONTAINER_ID + "></div>");
             for (var i = 0; i < 10; i++) {
@@ -50,7 +48,8 @@ var QuizGame = (function ($) {
 
     var Player = Class.create({
         initialize: function (name) {
-            this._name = name;
+            this._name = name || "John Doe";
+            this._name = $("<div>").text(this._name).html();
             this._points = 0;
         },
         addPoints: function (points) {
@@ -65,8 +64,8 @@ var QuizGame = (function ($) {
         render: function () {
             var container = $("<div></div>");
             var playerId = $("<div class=" + PLAYER_ID_CONTAINER_CLASS + "></div>");
-            playerId.append("<div class=" + NAME_CLASS + ">" + this._name + "</div>")
-            playerId.append("<div class=" + POINTS_CLAS + ">" + this._points + "</div>")
+            playerId.append($("<div class=" + NAME_CLASS + ">" + this._name + "</div>"));
+            playerId.append("<div class=" + POINTS_CLASS + ">" + this._points + "</div>")
             container.append(playerId);
 
             return container;
@@ -83,6 +82,14 @@ var QuizGame = (function ($) {
             return answer + 1;
         },
         getShortQuestionAnswer: function (question) {
+            if (!question) {
+                throw "Invalid input question! It cannot be null!";
+            }
+
+            if (!(question instanceof QuizGame.ShortAnswerQuestion)) {
+                throw "Invalid input question! It must be a short answer question!";
+            }
+
             var downLimit = question._downLimit;
             var upLimit = question._upLimit;
             var answer = Math.floor(Math.random() * (upLimit - downLimit + 1)) + downLimit;
@@ -93,10 +100,22 @@ var QuizGame = (function ($) {
 
     var Question = Class.create({
         initialize: function (task, answer) {
+            if (!task) {
+                throw "Invalid question task! It cannot be null!";
+            }
+
+            if (!answer) {
+                throw "The answer of the question must be specified!";
+            }
+
             this.task = task;
             this._answer = answer;
         },
         checkAnswer: function (inputAnswer) {
+            if (!inputAnswer) {
+                throw "You must specify a question answer to check with!";
+            }
+
             if (inputAnswer == this._answer) {
                 return true;
             }
@@ -111,6 +130,11 @@ var QuizGame = (function ($) {
     var MultipleChoiceQuestion = Class.create(Question, {
         initialize: function ($super, task, answer, choices) {
             $super(task, answer);
+
+            if (!choices) {
+                throw "Invalid choices for the question! You must specify 4 answer choices!"
+            }
+
             this._choices = choices;
         },
         render: function () {
@@ -142,8 +166,12 @@ var QuizGame = (function ($) {
     var ShortAnswerQuestion = Class.create(Question, {
         initialize: function ($super, task, answer, downLimit, upLimit) {
             $super(task, answer);
-            this._upLimit = upLimit;
+            if (!downLimit || !upLimit) {
+                throw "Invalid input limits! You muset specify down and up limit";
+            }
+
             this._downLimit = downLimit;
+            this._upLimit = upLimit;
         },
         render: function () {
             var container = $("<div class='" + SHORT_ANSWER_CLASS + "'></div>");
