@@ -111,6 +111,13 @@ body {
     margin-bottom: 10px;
 }
 
+#message {
+    margin: auto;
+    margin-top: 30px;
+    width: 50%;
+    min-height: 20px;
+}
+
 
 /*End of welcome screen styles*/
 

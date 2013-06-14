@@ -133,6 +133,13 @@ var a = (function ($) {
                 });
             });
 
+            function showMessage(message) {
+                //$("#flags-container").append("<p id='message'>" + message + "</p>");
+                var message_box = $("#message");
+                message_box.empty();
+                message_box.append(message);
+            };
+
             $("#stop-game-btn").click(function () {
                 self.field.clearFlags();
                 $("#start-game-btn").removeAttr("disabled");
@@ -143,16 +150,15 @@ var a = (function ($) {
                 var flags = self.field.initializeFlags();
                 self.renderer.renderFlags(flags);
 
+                //$("#flags-container").append("<p id='message'></p>");
                 var message = "Please, choise one of the blue flags";
-                $("#flags-container").append("<p id='message'>" + message + "</p>");
-                var message_box = $("#message");
+                showMessage(message);
 
                 $(".flag").on('click', function () {
 
                     var correcrAnswer = true; //TODO: This will recieve information if the the answer is correct or incorrect
-                    message = "Answer the question before continue.";
-                    message_box.empty();
-                    message_box.append(message)
+                    var message = "Answer the question before continue.";
+                    showMessage(message);
 
                     if (correcrAnswer) {
                         $(this).attr({
@@ -160,8 +166,7 @@ var a = (function ($) {
                             "alt": "Green flag"
                         });
                         message = "Answer is correct. Now choise again blue flag.";
-                        message_box.empty();
-                        message_box.append(message);
+                        showMessage(message);
                     } else {
                         $(this).attr("src", "images/red_flag.png");
                     }
