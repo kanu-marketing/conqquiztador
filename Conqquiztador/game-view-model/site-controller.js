@@ -25,21 +25,38 @@ var a = (function ($) {
         startGame: function () {
             var self = this;
 
-            var getQuestionPromise = function () {
+            // promises
+
+            var getQuestionPromise = function (type) {
                 var deferredQuestion = Q.defer();
 
-                $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
-                    var questionsNumber = data.length;
+                if (type === "multiple") {
+                    $.getJSON("model/bd-multiple-choice-questions.js", function (data) {
+                        var questionsNumber = data.length;
 
-                    var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
-                    self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
+                        var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
+                        self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
 
-                    // TODO: check if question is has been already shown
-                    $("#current-question").html(self.currentQuestion.render());
-                });
+                        // TODO: check if question is has been already shown
+                        $("#current-question").html(self.currentQuestion.render());
+                    });
+                }
+                else {
+                    $.getJSON("model/bd-short-answer-questions.js", function (data) {
+                        var questionsNumber = data.length;
+
+                        var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
+                        self.currentQuestion = QuestionParser.parseShortAnswerQuestion(data[index]);
+
+                        // TODO: check if question is has been already shown
+                        $("#current-question").html(self.currentQuestion.render());
+                    });
+                }
                 setTimeout(function () {
                     deferredQuestion.resolve();
                 }, 100);
+                var message = "Answer the question before continue.";
+                showMessage(message);
                 return deferredQuestion.promise;
             };
 
@@ -47,7 +64,7 @@ var a = (function ($) {
                 var deferred = Q.defer();
                 var answer = "";
 
-                $("#question_box td").on("click", function (ev) {
+                $("#question-box td").on("click", function (ev) {
                     ev = $(ev.target);
                     answer = ev.attr("id");
                     ev.css("background-color", "rgba(133, 133, 133, 0.5)");
@@ -60,10 +77,11 @@ var a = (function ($) {
                         $("td#" + randomId).css("background-color", "rgba(133, 133, 133, 0.5)");
                         deferred.resolve(randomId);
                     }
-                }, 1000); // Time to answer
+                }, 10000); // Time to answer
 
                 return deferred.promise;
             };
+
             var getAnswersPromise = function (answer) {
                 var deferred = Q.defer();
 
@@ -103,19 +121,33 @@ var a = (function ($) {
                             deferred.resolve("dummy");
                         }
                         else {
-                            deferred.reject("rematch");
+                            //deferred.reject("rematch");
+                            // when we add the logic for short question we shoud use reject to ask for rematch
+                            deferred.resolve("rematch");
                         }
                     }
                 }
                 else {
-                    deferred.reject("rematch");
+                    //deferred.reject("rematch");
+                    deferred.resolve("rematch");
                 }
                 return deferred.promise;
+            };
+
+            // functions
+
+            function showMessage(message) {
+                //$("#flags-container").append("<p id='message'>" + message + "</p>");
+                var message_box = $("#message");
+                message_box.empty();
+                message_box.append(message);
             };
 
             self.renderer.renderWelcome();
             self.renderer.renderSkeleton();
 
+            // attach events
+            
             $("#nickname-button").on("click", function () {
                 nickname = document.getElementById("nickname").value;
                 $("#welcome-screen").fadeOut(1000).promise()
@@ -130,13 +162,6 @@ var a = (function ($) {
                     $("#dummy-player").html(this.dummyPlayer.render());
                 });
             });
-
-            function showMessage(message) {
-                //$("#flags-container").append("<p id='message'>" + message + "</p>");
-                var message_box = $("#message");
-                message_box.empty();
-                message_box.append(message);
-            };
 
             $("#stop-game-btn").click(function () {
                 self.field.clearFlags();
@@ -154,33 +179,61 @@ var a = (function ($) {
                 showMessage(message);
 
                 $(".flag").on('click', function () {
+                    var selectedFlag = $(this);
 
-                    var correcrAnswer = true; //TODO: This will recieve information if the the answer is correct or incorrect
-                    var message = "Answer the question before continue.";
-                    showMessage(message);
-
-                    if (correcrAnswer) {
-                        $(this).attr({
-                            "src": "images/green_flag.png",
-                            "alt": "Green flag"
-                        });
-                        message = "Answer is correct. Now choise again blue flag.";
-                        showMessage(message);
-                    } else {
-                        $(this).attr("src", "images/red_flag.png");
-                    }
-
-                    getQuestionPromise()
+                    getQuestionPromise("multiple")
                     .then(getPlayerAnswerPromise)
                     .then(getAnswersPromise)
                     .then(getWinnerPromise)
                     .then(function (winner) {
                         console.log(winner);
-                    },
-                          function (rematch) {
-                              console.log(rematch);
-                          }
-                    );
+                        if (winner === "player") {
+                            $("#player .points").html(parseInt($("#player .points").html()) + 10);
+                            selectedFlag.attr({
+                                "src": "images/green_flag.png",
+                                "alt": "Green flag"
+                            });
+                            message = $("#player div.name").html() + " answered correct. Now choise again blue flag.";
+                            showMessage(message);
+                        }
+                        else {
+                            if (winner === "dummy") {
+                                $("#dummy-player .points").html(parseInt($("#dummy-player .points").html()) + 10);
+                                selectedFlag.attr({
+                                    "src": "images/green_flag.png",
+                                    "alt": "Green flag"
+                                });
+                                message = $("#dummy-player div.name").html() + " answered correct. Now choise again blue flag.";
+                                showMessage(message);
+                            }
+                            else {
+                                selectedFlag.attr({
+                                    "src": "images/red_flag.png",
+                                    "alt": "Red flag"
+                                });
+
+                                message = "Wrong answer! Now choise again blue flag.";
+                                showMessage(message);
+                            }
+                        }
+                        console.log($("[alt='Blue Flag']").length);
+                        if ($("[alt='Blue Flag']").length == 0) {
+                            var winnerName = "";
+                            if (parseInt($("#dummy-player .points").html()) > parseInt($("#player .points").html())) {
+                                winnerName = $("#dummy-player div.name").html();
+                            }
+                            else {
+                                if (parseInt($("#dummy-player .points").html()) < parseInt($("#player .points").html())) {
+                                    winnerName = $("#player div.name").html();
+                                }
+                                else {
+                                    winnerName = "No one"
+                                }
+                            }
+                            message = winnerName + " wins the game!";
+                            showMessage(message);
+                        }
+                    });
                 });
             });
         }
