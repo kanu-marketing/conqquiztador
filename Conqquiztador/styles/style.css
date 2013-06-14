@@ -14,44 +14,34 @@
     }
 
 body {
-    background: url("../images/green-board.jpg") no-repeat;
+    background: url("../images/main-bckg.jpg") repeat-x;
     color: #fff;
     font-weight: bolder;
 }
 
 #wrapper {
     display: none;
-}
-
-#game-field, #question-box, #player, #dummy-player, #welcome-screen {
-    background-color: rgba(0,0,0,0.3);
+    text-align: center;
 }
 
 #game-field {
-    margin: auto;
+    background: url("/images/game-field-bckg.png") no-repeat;
+}
+
+#question-box, #player, #dummy-player, #welcome-screen, #message {
+    background-color: rgba(0,0,0,0.5);
+}
+
+#game-field {
+    padding: 20px;
+    margin: 5px;
+    margin: 0 auto;
     margin-top: 50px;
-    width: 70%;
-    height: 150px;
+    width: 860px;
+    height: 200px;
 }
 
 
-
-#player {
-    margin-left: 20%;
-    margin-top: 30px;
-    float: left;
-    width: 300px;
-    height: 100px;
-}
-
-#dummy-player {
-    margin-right: 20%;
-    float: right;
-    margin-top: 30px;
-    width: 300px;
-    height: 100px;
-    right: 50%;
-}
 
 #flags-container {
     width: 700px;
@@ -171,6 +161,24 @@ body {
 
 
 /*Players styles*/
+
+#player, #dummy-player {
+    margin-top: 30px;
+    width: 300px;
+    height: 100px;
+}
+
+#player {
+    margin-left: 20%;
+    float: left;
+}
+
+#dummy-player {
+    margin-right: 20%;
+    float: right;
+    right: 50%;
+}
+
 .name {
     float: left;
 }

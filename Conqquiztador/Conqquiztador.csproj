@@ -74,6 +74,7 @@
     <Content Include="images\india_flag.jpg" />
     <Content Include="images\old-world-map.jpg" />
     <Content Include="images\game-field-bckg.png" />
+    <Content Include="images\main-bckg.jpg" />
     <Content Include="images\red_flag.png" />
     <Content Include="images\world_map.png" />
     <Content Include="index.html" />

@@ -64,7 +64,6 @@ var a = (function ($) {
 
                 return deferred.promise;
             };
-            //this.renderer.renderNavigation();
             var getAnswersPromise = function (answer) {
                 var deferred = Q.defer();
 
@@ -114,9 +113,8 @@ var a = (function ($) {
                 return deferred.promise;
             };
 
-            //self.renderer.renderWelcome();
+            self.renderer.renderWelcome();
             self.renderer.renderSkeleton();
-            $("#wrapper").fadeIn(1000)
 
             $("#nickname-button").on("click", function () {
                 nickname = document.getElementById("nickname").value;
@@ -142,6 +140,7 @@ var a = (function ($) {
 
             $("#stop-game-btn").click(function () {
                 self.field.clearFlags();
+                $("#current-question").hide();
                 $("#start-game-btn").removeAttr("disabled");
             });
 
