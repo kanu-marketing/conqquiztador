@@ -20,9 +20,6 @@ var GameRenderer = (function ($) {
     var HELP_ID = "help-btn";
 
     var Renderer = Class.create({
-        initialize: function () {
-
-        },
         renderWelcome: function () {
             var container = $("<div id='" + WELCOME_ID + "' class='" + CONTAINER_CLASS + "'></div>");
             container.append("<h1>Welcome To BananaQuiz Game!</h1>");
@@ -56,19 +53,24 @@ var GameRenderer = (function ($) {
 
             $(BODY).append(wrapper);
         }, renderFlags: function (flags) {
+            if (!flags) {
+                throw "Invalid input flags DOM object! It cannot be null!";
+            }
+
+            if (!(flags instanceof jQuery)) {
+                throw "The input is not a valid jQuery DOM object!"
+            }
+
             $("#" + FIELD_ID).append(flags);
         }
     });
 
     function renderGameField() {
         var container = $("<div id=" + FIELD_ID + "></div>")
-        container.addClass(CONTAINER_CLASS);
+        //container.addClass(CONTAINER_CLASS);
 
         var navigation = renderNavigation();
         container.append(navigation);
-
-        //var flagsContainer = "<div id=" + FLAGS_CONTAINER_ID + "></div>";
-        //container.append(flagsContainer);
 
         return container;
     }

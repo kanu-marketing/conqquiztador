@@ -46,7 +46,7 @@ var a = (function ($) {
             var getPlayerAnswerPromise = function () {
                 var deferred = Q.defer();
                 var answer = "";
-                
+
                 $("#question_box td").on("click", function (ev) {
                     ev = $(ev.target);
                     answer = ev.attr("id");
@@ -61,7 +61,7 @@ var a = (function ($) {
                         deferred.resolve(randomId);
                     }
                 }, 1000); // Time to answer
-                
+
                 return deferred.promise;
             };
             //this.renderer.renderNavigation();
@@ -114,8 +114,9 @@ var a = (function ($) {
                 return deferred.promise;
             };
 
-            self.renderer.renderWelcome();
+            //self.renderer.renderWelcome();
             self.renderer.renderSkeleton();
+            $("#wrapper").fadeIn(1000)
 
             $("#nickname-button").on("click", function () {
                 nickname = document.getElementById("nickname").value;
@@ -134,9 +135,11 @@ var a = (function ($) {
 
             $("#stop-game-btn").click(function () {
                 self.field.clearFlags();
+                $("#start-game-btn").removeAttr("disabled");
             });
 
             $("#start-game-btn").on('click', function () {
+                $("#start-game-btn").attr("disabled", "disabled");
                 var flags = self.field.initializeFlags();
                 self.renderer.renderFlags(flags);
 
