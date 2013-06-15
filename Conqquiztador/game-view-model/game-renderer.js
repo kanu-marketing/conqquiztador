@@ -57,7 +57,8 @@ var GameRenderer = (function ($) {
             wrapper.append(dummyPlayerBox);
 
             $(BODY).append(wrapper);
-        }, renderFlags: function (flags) {
+        },
+        renderFlags: function (flags) {
             if (!flags) {
                 throw "Invalid input flags DOM object! It cannot be null!";
             }
