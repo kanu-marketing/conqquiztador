@@ -9,13 +9,14 @@
     <script src="game-view-model/game-renderer.js"></script>
     <script src="game-view-model/site-controller.js"></script>
     <script src="game-view-model/question-parser.js"></script>
+    <script src="scripts/local-storage-shiv.js"></script>
 </head>
 <body>
     <script>
-        (function ($) {
-            var siteControler = new a.SiteController();
+        (function () {
+            var siteControler = new site.SiteController();
             siteControler.startGame();
-        }(jQuery));
+        }());
     </script>
 </body>
 </html>
