@@ -4,6 +4,11 @@
 
 var GameRenderer = (function ($) {
     var CONTAINER_CLASS = "container";
+    var SOCIAL_BUTTONS_CLASS = "addthis_toolbox addthis_default_style";
+    var FACEBOOK_BUTTON_CLASS = "addthis_button_facebook_like";
+    var TWEETER_BUTTON_CLASS = "addthis_button_tweet";
+    var PINTEREST_BUTTON_CLASS = "addthis_button_pinterest_pinit";
+    var SOCIAL_CONTAINER_CLASS = "addthis_counter addthis_pill_style";
     var BODY = "body";
     var WELCOME_ID = "welcome-screen";
     var NICKNAME_ID = "nickname";
@@ -12,14 +17,15 @@ var GameRenderer = (function ($) {
     var FIELD_ID = "game-field";
     var QUESTION_BOX_ID = "question-box";
     var MESSAGE_BOX_ID = "message";
-    var QEUSTION_LABEL_ID = "question-label"
+    var QEUSTION_LABEL_ID = "question-label";
     var CURRENT_QUESTION_ID = "current-question";
-    var PLAYER_ID = "player"
+    var PLAYER_ID = "player";
     var DUMMY_PLAYER_ID = "dummy-player";
     var START_ID = "start-game-btn";
     var STOP_ID = "stop-game-btn";
     var HELP_ID = "help-btn";
     var SCORES_ID = "score-btn";
+    var SOCIAL_BUTTONS_ID = "social-buttons";
 
     var Renderer = Class.create({
         renderWelcome: function () {
@@ -38,8 +44,12 @@ var GameRenderer = (function ($) {
             $(BODY).append(container);
         },
         renderSkeleton: function () {
+
             var wrapper = $("<div id=" + WRAPPER_ID + "></div>");
             wrapper.css("display", "none");
+
+            var socialButtons = renderSocialButtons();
+            wrapper.append(socialButtons);
 
             var gameField = renderGameField();
             wrapper.append(gameField);
@@ -130,6 +140,34 @@ var GameRenderer = (function ($) {
     function renderPlayerBox(id) {
         var container = $("<div id=" + id + "></div>");
         container.addClass(CONTAINER_CLASS);
+
+        return container;
+    }
+
+    function renderSocialButtons() {
+        var container = $("<div id=" + SOCIAL_BUTTONS_ID + "></div>");
+        container.addClass(SOCIAL_BUTTONS_CLASS);
+
+        var facebookButton = $("<a fb:like:layout='button_count'></a>");
+        facebookButton.addClass(FACEBOOK_BUTTON_CLASS);
+        container.append(facebookButton);
+
+        var tweeterButton = $("<a></a>");
+        tweeterButton.addClass(TWEETER_BUTTON_CLASS);
+        container.append(tweeterButton);
+
+        var pinterestButton = $("<a></a>");
+        pinterestButton.addClass(PINTEREST_BUTTON_CLASS);
+        container.append(pinterestButton);
+
+        var socialButtonsContainer = $("<a></a>");
+        socialButtonsContainer.addClass(SOCIAL_CONTAINER_CLASS);
+        container.append(socialButtonsContainer);
+
+        var script = $("<script></script>");
+        script.attr("src", "//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-51bc7f984764fef1");
+        script.attr("type", "text/javascript");
+        container.append(script);
 
         return container;
     }

@@ -219,5 +219,20 @@ body {
 }
 /*End of navigation styles*/
 
+/* Social Share Buttons BEGIN */
+
+#social-buttons {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.social-buttons {
+     padding: 0px;
+     margin: 0px;
+}
+
+/* Social Share Buttons END */
+
 
 

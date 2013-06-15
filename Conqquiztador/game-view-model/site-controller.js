@@ -201,6 +201,8 @@ var site = (function ($) {
                 self.field.clearFlags();
                 $("#current-question").hide();
                 $("#start-game-btn").removeAttr("disabled");
+                var message = "Game is stopped! Use the button above to start new game.";
+                showMessage(message);
             });
 
             $("#start-game-btn").on('click', function () {
