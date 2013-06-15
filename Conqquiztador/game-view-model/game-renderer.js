@@ -19,6 +19,7 @@ var GameRenderer = (function ($) {
     var START_ID = "start-game-btn";
     var STOP_ID = "stop-game-btn";
     var HELP_ID = "help-btn";
+    var SCORES_ID = "score-btn";
 
     var Renderer = Class.create({
         renderWelcome: function () {
@@ -66,6 +67,22 @@ var GameRenderer = (function ($) {
             }
 
             $("#" + FIELD_ID).append(flags);
+        },
+        renderScores: function renderScores(tuples) {
+            var table = $("<table id='score-board'></table>");
+
+            for (i = 0; i < 5 && i < tuples.length; i++) {
+                var name = tuples[i][0];
+                var score = tuples[i][1];
+                var row = $("<tr></tr>");
+                row.append($("<td>" + name + "</td>"));
+                row.append($("<td>" + score + "</td>"));
+                table.append(row);
+            }
+
+            console.log(table);
+            //resultHTML += "</table>";
+            //document.getElementById("topPlayers").innerHTML = resultHTML;
         }
     });
 
@@ -84,6 +101,7 @@ var GameRenderer = (function ($) {
         container.append("<button id=" + START_ID + ">Start Game</button>");
         container.append("<button id=" + STOP_ID + ">Stop Game</button>");
         container.append("<button id=" + HELP_ID + ">Help</button>");
+        container.append("<button id=" + SCORES_ID + ">Top Scores</button>");
 
         return container;
     }
@@ -119,4 +137,3 @@ var GameRenderer = (function ($) {
         Renderer: Renderer
     }
 }(jQuery));
-

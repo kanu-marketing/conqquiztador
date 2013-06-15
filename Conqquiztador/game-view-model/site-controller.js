@@ -13,14 +13,15 @@
 /// . select round winner and add points
 /// . repeat 2. until all fields are taken
 
-var a = (function ($) {
+var site = (function ($) {
     var SiteController = Class.create({
         initialize: function () {
+            //var self = this;
             this.field = new QuizGame.GameField();
             this.player = new QuizGame.Player;
             this.dummyPlayer = new QuizGame.DummyPlayer;
             this.renderer = new GameRenderer.Renderer();
-            this.currentQuestion;
+            //this.currentQuestion;
         },
         startGame: function () {
             var self = this;
@@ -143,11 +144,44 @@ var a = (function ($) {
                 message_box.append(message);
             };
 
+            function loadPairs() {
+                var scores = {};
+                for (var i = 0; i < localStorage.length; i++) {
+                    var name = localStorage.key(i);
+                    var score = parseInt(localStorage.getItem(name));
+                    scores[name] = score;
+                }
+
+                var tuples = [];
+                for (var key in scores) {
+                    tuples.push([key, scores[key]]);
+                }
+                tuples.sort(function (a, b) {
+                    a = a[1];
+                    b = b[1];
+
+                    return a < b ? -1 : (a > b ? 1 : 0);
+                });
+
+                return tuples;
+            }
+
+            function saveScore(name, score) {
+                var value = score;
+                var key = name;
+                localStorage.setItem(key, value);
+            }
+
             self.renderer.renderWelcome();
             self.renderer.renderSkeleton();
 
             // attach events
             
+            $("#score-btn").click(function () {
+                console.log(loadPairs());
+                self.renderer.renderScores(loadPairs());
+            })
+
             $("#nickname-button").on("click", function () {
                 nickname = document.getElementById("nickname").value;
                 $("#welcome-screen").fadeOut(1000).promise()
@@ -155,11 +189,11 @@ var a = (function ($) {
                     $("#wrapper").fadeIn(1000)
                 })
                 .then(function () {
-                    this.player = new QuizGame.Player(nickname);
-                    this.dummyPlayer = new QuizGame.DummyPlayer();
+                    self.player = new QuizGame.Player(nickname);
+                    self.dummyPlayer = new QuizGame.DummyPlayer();
 
-                    $("#player").append(this.player.render());
-                    $("#dummy-player").html(this.dummyPlayer.render());
+                    $("#player").append(self.player.render());
+                    $("#dummy-player").html(self.dummyPlayer.render());
                 });
             });
 
@@ -173,8 +207,6 @@ var a = (function ($) {
                 $("#start-game-btn").attr("disabled", "disabled");
                 var flags = self.field.initializeFlags();
                 self.renderer.renderFlags(flags);
-
-                //$("#flags-container").append("<p id='message'></p>");
                 var message = "Please, choise one of the blue flags";
                 showMessage(message);
 
@@ -189,6 +221,8 @@ var a = (function ($) {
                         console.log(winner);
                         if (winner === "player") {
                             $("#player .points").html(parseInt($("#player .points").html()) + 10);
+                            //this.player.addPoints(10);
+
                             selectedFlag.attr({
                                 "src": "images/green_flag.png",
                                 "alt": "Green flag"
@@ -199,6 +233,7 @@ var a = (function ($) {
                         else {
                             if (winner === "dummy") {
                                 $("#dummy-player .points").html(parseInt($("#dummy-player .points").html()) + 10);
+                                //self.dummyplayer.addPoints(10);
                                 selectedFlag.attr({
                                     "src": "images/green_flag.png",
                                     "alt": "Green flag"
@@ -225,6 +260,7 @@ var a = (function ($) {
                             else {
                                 if (parseInt($("#dummy-player .points").html()) < parseInt($("#player .points").html())) {
                                     winnerName = $("#player div.name").html();
+                                    saveScore(winnerName, parseInt($("#player .points").html()));
                                 }
                                 else {
                                     winnerName = "No one"
