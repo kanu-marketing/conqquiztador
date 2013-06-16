@@ -255,7 +255,8 @@ var site = (function ($) {
                         }
                         else {
                             if (winner === "dummy") {
-                                self.dummyplayer.addPoints(10);
+                                console.log(self.dummyplayer);
+                                self.dummyPlayer.addPoints(10);
                                 $("#dummy-player").html(self.dummyPlayer.render());
 
                                 selectedFlag.attr({
