@@ -16,6 +16,7 @@ var GameRenderer = (function ($) {
     var WRAPPER_ID = "wrapper";
     var FIELD_ID = "game-field";
     var SCORE_BOX_ID = "score-box";
+    var HELP_BOX_ID = "help-box";
     var QUESTION_BOX_ID = "question-box";
     var MESSAGE_BOX_ID = "message";
     var QEUSTION_LABEL_ID = "question-label";
@@ -61,6 +62,9 @@ var GameRenderer = (function ($) {
             scoreBoardBox.addClass("container");
             scoreBoardBox.css("display", "none");
             wrapper.append(scoreBoardBox);
+
+            var helpBox = renderHelpBox();
+            wrapper.append(helpBox);
 
             var messageBox = renderMessageBox();
             wrapper.append(messageBox);
@@ -128,6 +132,19 @@ var GameRenderer = (function ($) {
         container.append("<button id=" + END_ID + ">End Game</button>");
         container.append("<button id=" + HELP_ID + ">Help</button>");
         container.append("<button id=" + SCORES_ID + ">Top Scores</button>");
+
+        return container;
+    }
+
+    function renderHelpBox() {
+        var container = $("<div id=" + HELP_BOX_ID + "></div>");
+        container.addClass(CONTAINER_CLASS);
+        container.css("display", "block");
+        container.append("<p>Use the menu above to start new quiz game.</p>");
+        container.append("<p>You have to open the blue flags one by one.</p>");
+        container.append("<p>When new flag is opened, the question will be show.</p>");
+        container.append("<p>You and your opponent answer the questions at the same time.</p>");
+        container.append("<p>The player who's answer is more quickly will earn points.</p>");
 
         return container;
     }

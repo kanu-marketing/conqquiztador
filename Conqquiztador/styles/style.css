@@ -24,7 +24,7 @@ body {
     text-align: center;
 }
 
-#question-box, #score-box, #player, #dummy-player, #welcome-screen, #message {
+#question-box, #score-box, #player, #dummy-player, #welcome-screen, #message, #help-box {
     background-color: rgba(0,0,0,0.5);
     margin: 0 auto;
 }
@@ -227,13 +227,13 @@ body {
 }
 /* End of Social Share Buttons styles */
 
-/* Score list styles */
-#score-box {
+/* Score list/Help box styles */
+#score-box, #help-box {
     width: 860px;
     margin-top: 25px;
 }
 
-#score-board, #score-board p {
+#score-board, #score-board p, #help-box p {
     margin: 0;
     padding: 0;
     font-weight: normal;
@@ -243,7 +243,13 @@ body {
     font-size: 25px;
     font-weight: bold;
 }
-/* End of score list styles */
+
+#help-box p {
+    margin: auto;
+}
+/* End of score list/Help box styles */
+
+
 
 
 
