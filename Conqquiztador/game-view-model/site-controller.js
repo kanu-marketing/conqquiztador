@@ -14,6 +14,9 @@
 /// . repeat 2. until all fields are taken
 
 var site = (function ($) {
+    var PLAYER_COLOR = "rgba(255, 216, 0, 0.5)";
+    var DUMMY_PLAYER_COLOR = "rgba(255, 106, 0, 0.5)";
+
     var SiteController = Class.create({
         initialize: function () {
             //var self = this;
@@ -68,14 +71,14 @@ var site = (function ($) {
                 $("#question-box td").on("click", function (ev) {
                     ev = $(ev.target);
                     answer = ev.attr("id");
-                    ev.css("background-color", "rgba(133, 133, 133, 0.5)");
+                    ev.css("background-color", PLAYER_COLOR);
                     deferred.resolve(answer);
                 });
 
                 setTimeout(function () {
                     if (answer == "") {
                         var randomId = Math.floor((Math.random() * 10) % 4) + 1;
-                        $("td#" + randomId).css("background-color", "rgba(133, 133, 133, 0.5)");
+                        $("td#" + randomId).css("background-color", PLAYER_COLOR);
                         deferred.resolve(randomId);
                     }
                 }, 10000); // Time to answer
@@ -89,7 +92,7 @@ var site = (function ($) {
                 var dummyAnswer = self.dummyPlayer.getMultipleQuestionAnswer();
                 var rightAnswer = self.currentQuestion.getAnswer();
                 setTimeout(function () {
-                    $("td#" + dummyAnswer).css("background-color", "rgba(233, 33, 133, 0.5)");
+                    $("td#" + dummyAnswer).css("background-color", DUMMY_PLAYER_COLOR);
                 }, 1000);
                 setTimeout(function () {
                     $("td#" + rightAnswer).css("background-color", "rgba(0, 255, 0, 0.5)");
@@ -207,6 +210,12 @@ var site = (function ($) {
                 self.field.clearFlags();
                 $("#current-question").html("");
                 $("#start-game-btn").removeAttr("disabled");
+
+                self.player = new QuizGame.Player(self.player.getName());
+                self.dummyPlayer = new QuizGame.DummyPlayer(self.dummyPlayer.getName());
+
+                $("#player").html(self.player.render());
+                $("#dummy-player").html(self.dummyPlayer.render());
                 var message = "Game ended! Use the button above to start new game.";
                 showMessage(message);
             });
