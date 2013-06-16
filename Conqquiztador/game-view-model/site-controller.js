@@ -87,7 +87,7 @@ var site = (function ($) {
                 var deferred = Q.defer();
 
                 var dummyAnswer = self.dummyPlayer.getMultipleQuestionAnswer();
-                var rightAnswer = self.currentQuestion.answer();
+                var rightAnswer = self.currentQuestion.getAnswer();
                 setTimeout(function () {
                     $("td#" + dummyAnswer).css("background-color", "rgba(233, 33, 133, 0.5)");
                 }, 1000);

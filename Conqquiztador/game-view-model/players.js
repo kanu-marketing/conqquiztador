@@ -43,8 +43,8 @@
             return answer + 1;
         },
         getShortQuestionAnswer: function (question) {
-            var downLimit = question._downLimit;
-            var upLimit = question._upLimit;
+            var downLimit = question.getDownLimit();
+            var upLimit = question.getUpLimit();
             var answer = Math.floor(Math.random() * (upLimit - downLimit + 1)) + downLimit;
 
             return answer;

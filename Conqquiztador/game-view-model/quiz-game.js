@@ -90,8 +90,8 @@ var QuizGame = (function ($) {
                 throw "Invalid input question! It must be a short answer question!";
             }
 
-            var downLimit = question._downLimit;
-            var upLimit = question._upLimit;
+            var downLimit = question.getDownLimit();
+            var upLimit = question.getUpLimit();
             var answer = Math.floor(Math.random() * (upLimit - downLimit + 1)) + downLimit;
 
             return answer;
@@ -122,7 +122,7 @@ var QuizGame = (function ($) {
 
             return false;
         },
-        answer: function () {
+        getAnswer: function () {
             return this._answer;
         }
     });
@@ -172,6 +172,12 @@ var QuizGame = (function ($) {
 
             this._downLimit = downLimit;
             this._upLimit = upLimit;
+        },
+        getDownLimit: function () {
+            return this._downLimit;
+        },
+        getUpLimit: function () {
+            return this._upLimit;
         },
         render: function () {
             var container = $("<div class='" + SHORT_ANSWER_CLASS + "'></div>");
