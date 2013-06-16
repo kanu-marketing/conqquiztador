@@ -24,24 +24,20 @@ body {
     text-align: center;
 }
 
-#game-field {
-    background: url("/images/game-field-bckg.png") no-repeat;
-}
-
-#question-box, #player, #dummy-player, #welcome-screen, #message {
+#question-box, #score-box, #player, #dummy-player, #welcome-screen, #message {
     background-color: rgba(0,0,0,0.5);
+    margin: 0 auto;
 }
 
 #game-field {
-    padding: 20px;
-    margin: 5px;
-    margin: 0 auto;
     margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
     width: 860px;
     height: 200px;
+    background: url("/images/game-field-bckg.png") no-repeat;
 }
-
-
 
 #flags-container {
     width: 700px;
@@ -165,7 +161,6 @@ body {
 #player, #dummy-player {
     margin-top: 30px;
     width: 300px;
-    height: 50px;
 }
 
 #player {
@@ -219,8 +214,7 @@ body {
 }
 /*End of navigation styles*/
 
-/* Social Share Buttons BEGIN */
-
+/* Social Share Buttons styles */
 #social-buttons {
     position: absolute;
     top: 5px;
@@ -228,11 +222,28 @@ body {
 }
 
 .social-buttons {
-     padding: 0px;
-     margin: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+/* End of Social Share Buttons styles */
+
+/* Score list styles */
+#score-box {
+    width: 860px;
+    margin-top: 25px;
 }
 
-/* Social Share Buttons END */
+#score-board, #score-board p {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+
+.score-name {
+    font-size: 25px;
+    font-weight: bold;
+}
+/* End of score list styles */
 
 
 

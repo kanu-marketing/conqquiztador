@@ -38,8 +38,8 @@ var site = (function ($) {
                         var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
                         self.currentQuestion = QuestionParser.parseMultipleChoiceQuestion(data[index]);
 
-                        // TODO: check if question is has been already shown
                         $("#current-question").html(self.currentQuestion.render());
+                        deferredQuestion.resolve();
                     });
                 }
                 else {
@@ -49,13 +49,13 @@ var site = (function ($) {
                         var index = Math.floor((Math.random() * 100 + 1) % questionsNumber);
                         self.currentQuestion = QuestionParser.parseShortAnswerQuestion(data[index]);
 
-                        // TODO: check if question is has been already shown
                         $("#current-question").html(self.currentQuestion.render());
+                        deferredQuestion.resolve();
                     });
                 }
-                setTimeout(function () {
-                    deferredQuestion.resolve();
-                }, 100);
+                //setTimeout(function () {
+                //    deferredQuestion.resolve();
+                //}, 100);
                 var message = "Answer the question before continue.";
                 showMessage(message);
                 return deferredQuestion.promise;
@@ -176,10 +176,16 @@ var site = (function ($) {
             self.renderer.renderSkeleton();
 
             // attach events
-            
+
             $("#score-btn").click(function () {
-                console.log(loadPairs());
-                self.renderer.renderScores(loadPairs());
+                var scoreBox = $("#score-box");
+                if (scoreBox.css("display") === "none") {
+                    scoreBox.html(self.renderer.renderScores(loadPairs()));
+                    scoreBox.css("display", "block");
+                }
+                else {
+                    scoreBox.css("display", "none");
+                }
             })
 
             $("#nickname-button").on("click", function () {
@@ -197,11 +203,11 @@ var site = (function ($) {
                 });
             });
 
-            $("#stop-game-btn").click(function () {
+            $("#end-game-btn").click(function () {
                 self.field.clearFlags();
-                $("#current-question").hide();
+                $("#current-question").html("");
                 $("#start-game-btn").removeAttr("disabled");
-                var message = "Game is stopped! Use the button above to start new game.";
+                var message = "Game ended! Use the button above to start new game.";
                 showMessage(message);
             });
 
