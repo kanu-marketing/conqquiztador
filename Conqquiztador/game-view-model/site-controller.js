@@ -224,6 +224,12 @@ var site = (function ($) {
                 $("#start-game-btn").attr("disabled", "disabled");
                 var flags = self.field.initializeFlags();
                 self.renderer.renderFlags(flags);
+                if ($("#help-box").is(":visible")) {
+                    $("#help-box").hide();
+                }
+                if ($("#score-box").is(":visible")) {
+                    $("#score-box").hide();
+                }
                 var message = "Please, choise one of the blue flags";
                 showMessage(message);
 
@@ -289,6 +295,16 @@ var site = (function ($) {
                         }
                     });
                 });
+            });
+
+            $("#help-btn").click(function () {
+                var helpBox = $("#help-box");
+                if (helpBox.is(":visible")) {
+                    helpBox.hide();
+                }
+                else {
+                    helpBox.show();
+                }
             });
         }
     });
