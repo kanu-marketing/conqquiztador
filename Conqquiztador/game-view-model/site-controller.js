@@ -228,8 +228,8 @@ var site = (function ($) {
                     .then(function (winner) {
                         console.log(winner);
                         if (winner === "player") {
-                            $("#player .points").html(parseInt($("#player .points").html()) + 10);
-                            //this.player.addPoints(10);
+                           self.player.addPoints(10);
+                           $("#player").html(self.player.render());
 
                             selectedFlag.attr({
                                 "src": "images/green_flag.png",
@@ -240,8 +240,9 @@ var site = (function ($) {
                         }
                         else {
                             if (winner === "dummy") {
-                                $("#dummy-player .points").html(parseInt($("#dummy-player .points").html()) + 10);
-                                //self.dummyplayer.addPoints(10);
+                                self.dummyplayer.addPoints(10);
+                                $("#dummy-player").html(self.dummyPlayer.render());
+
                                 selectedFlag.attr({
                                     "src": "images/green_flag.png",
                                     "alt": "Green flag"
@@ -255,7 +256,7 @@ var site = (function ($) {
                                     "alt": "Red flag"
                                 });
 
-                                message = "Wrong answer! Now choise again blue flag.";
+                                message = "Wrong answer! Now choose again blue flag.";
                                 showMessage(message);
                             }
                         }
