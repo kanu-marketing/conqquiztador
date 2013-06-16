@@ -8,3 +8,8 @@ E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\bin\Con
 E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\obj\Debug\Conqquiztador.csprojResolveAssemblyReference.cache
 E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\obj\Debug\Conqquiztador.dll
 E:\Engineering\First term\Javascript Applications\Teamwork\Conqquiztador\obj\Debug\Conqquiztador.pdb
+C:\Users\Deblia\Desktop\Final team banana\Conqquiztador\bin\Conqquiztador.dll
+C:\Users\Deblia\Desktop\Final team banana\Conqquiztador\bin\Conqquiztador.pdb
+C:\Users\Deblia\Desktop\Final team banana\Conqquiztador\obj\Debug\Conqquiztador.csprojResolveAssemblyReference.cache
+C:\Users\Deblia\Desktop\Final team banana\Conqquiztador\obj\Debug\Conqquiztador.dll
+C:\Users\Deblia\Desktop\Final team banana\Conqquiztador\obj\Debug\Conqquiztador.pdb

@@ -80,6 +80,11 @@
     <Content Include="index.html" />
     <Content Include="model\bd-multiple-choice-questions.js" />
     <Content Include="model\bd-short-answer-questions.js" />
+    <Content Include="QUnit tests\testing-dom.html" />
+    <Content Include="QUnit tests\qunit-1.11.0.css" />
+    <Content Include="QUnit tests\qunit-1.11.0.js" />
+    <Content Include="QUnit tests\testing-quiz-game.html" />
+    <Content Include="QUnit tests\testing-quiz-game.js" />
     <Content Include="scripts\jquery-1.10.0.js" />
     <Content Include="scripts\prototype.js" />
     <Content Include="scripts\q.js" />
