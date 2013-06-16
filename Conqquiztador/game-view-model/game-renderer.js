@@ -15,6 +15,7 @@ var GameRenderer = (function ($) {
     var NICKNAME_BUTTON_ID = "nickname-button";
     var WRAPPER_ID = "wrapper";
     var FIELD_ID = "game-field";
+    var SCORE_BOX_ID = "score-box";
     var QUESTION_BOX_ID = "question-box";
     var MESSAGE_BOX_ID = "message";
     var QEUSTION_LABEL_ID = "question-label";
@@ -22,10 +23,12 @@ var GameRenderer = (function ($) {
     var PLAYER_ID = "player";
     var DUMMY_PLAYER_ID = "dummy-player";
     var START_ID = "start-game-btn";
-    var STOP_ID = "stop-game-btn";
+    var END_ID = "end-game-btn";
     var HELP_ID = "help-btn";
     var SCORES_ID = "score-btn";
     var SOCIAL_BUTTONS_ID = "social-buttons";
+    var SCOREBOARD_ID = "score-board";
+    var SCORE_NAME_CLASS = "score-name";
 
     var Renderer = Class.create({
         renderWelcome: function () {
@@ -54,6 +57,11 @@ var GameRenderer = (function ($) {
             var gameField = renderGameField();
             wrapper.append(gameField);
 
+            var scoreBoardBox = $("<div id=" + SCORE_BOX_ID + "></div>");
+            scoreBoardBox.addClass("container");
+            scoreBoardBox.css("display", "none");
+            wrapper.append(scoreBoardBox);
+
             var messageBox = renderMessageBox();
             wrapper.append(messageBox);
 
@@ -80,26 +88,33 @@ var GameRenderer = (function ($) {
             $("#" + FIELD_ID).append(flags);
         },
         renderScores: function renderScores(tuples) {
-            var table = $("<table id='score-board'></table>");
+
+            if (tuples == null) {
+                throw "Invalid input tuples! Value cannot be null!";
+            }
+
+            if (tuples.length == 0) {
+                var emptyList = $("<p>No scores yet!</p>");
+                return emptyList;
+            }
+
+            var scoreList = $("<p id=" + SCOREBOARD_ID + "></p>");
+            scoreList.append("<h3>Scores:</h3>")
 
             for (i = 0; i < 5 && i < tuples.length; i++) {
                 var name = tuples[i][0];
-                var score = tuples[i][1];
-                var row = $("<tr></tr>");
-                row.append($("<td>" + name + "</td>"));
-                row.append($("<td>" + score + "</td>"));
-                table.append(row);
+                var points = tuples[i][1];
+                var scoreItem =
+                    "<span>" + (i + 1) + ". <span class=" + SCORE_NAME_CLASS + ">" + name + "</span> - " + points + " points</span> "
+                scoreList.append(scoreItem);
             }
 
-            console.log(table);
-            //resultHTML += "</table>";
-            //document.getElementById("topPlayers").innerHTML = resultHTML;
+            return scoreList;
         }
     });
 
     function renderGameField() {
         var container = $("<div id=" + FIELD_ID + "></div>")
-        //container.addClass(CONTAINER_CLASS);
 
         var navigation = renderNavigation();
         container.append(navigation);
@@ -110,7 +125,7 @@ var GameRenderer = (function ($) {
     function renderNavigation() {
         var container = $("<div></div>");
         container.append("<button id=" + START_ID + ">Start Game</button>");
-        container.append("<button id=" + STOP_ID + ">Stop Game</button>");
+        container.append("<button id=" + END_ID + ">End Game</button>");
         container.append("<button id=" + HELP_ID + ">Help</button>");
         container.append("<button id=" + SCORES_ID + ">Top Scores</button>");
 
