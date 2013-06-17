@@ -3,16 +3,8 @@
 /// <reference path="question.js" />
 /// <reference path="quiz-game.js" />
 
-/// Game flow
-/// 1. init player - choose nickname
-/// 2. start game
-/// . choose field to attack - 10 seconds countdown if not selected automatically is choosed
-/// . get question - type ABC
-/// . get player and computer answers
-/// . if answers are same we have second battle with question of type 123
-/// . select round winner and add points
-/// . repeat 2. until all fields are taken
-
+// TODO: Refactoring
+// TODO: Rematch functionality
 var game = (function ($) {
     var PLAYER_COLOR = "rgba(255, 216, 0, 0.5)";
     var DUMMY_PLAYER_COLOR = "rgba(255, 106, 0, 0.5)";
