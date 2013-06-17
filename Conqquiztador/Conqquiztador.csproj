@@ -57,13 +57,10 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="game-view-model\game-field.js" />
+    <Content Include="class-diagram.png" />
     <Content Include="game-view-model\game-renderer.js" />
-    <Content Include="game-view-model\players.js" />
     <Content Include="game-view-model\question-parser.js" />
-    <Content Include="game-view-model\question.js" />
     <Content Include="game-view-model\quiz-game.js" />
-    <Content Include="game-view-model\renderer.js" />
     <Content Include="game-view-model\site-controller.js" />
     <Content Include="images\green-board.jpg" />
     <Content Include="images\animated-flag-india.gif" />
@@ -80,6 +77,8 @@
     <Content Include="index.html" />
     <Content Include="model\bd-multiple-choice-questions.js" />
     <Content Include="model\bd-short-answer-questions.js" />
+    <Content Include="QUnit tests\testing-question-parser.html" />
+    <Content Include="QUnit tests\testing-question-parser.js" />
     <Content Include="QUnit tests\testing-quizgame-shortanswer-question.html" />
     <Content Include="QUnit tests\testing-quizgame-shortanswer-question.js" />
     <Content Include="QUnit tests\testing-quizgame-multiplechoice-question.html" />
@@ -95,13 +94,13 @@
     <Content Include="QUnit tests\testing-quizgame-player.html" />
     <Content Include="QUnit tests\testing-quizgame-player.js" />
     <Content Include="scripts\jquery-1.10.0.js" />
+    <Content Include="scripts\jquery-1.10.1.min.js" />
     <Content Include="scripts\prototype.js" />
     <Content Include="scripts\q.js" />
+    <Content Include="scripts\q.min.js" />
     <Content Include="scripts\qunit-1.11.0.js" />
     <Content Include="styles\qunit-1.11.0.css" />
     <Content Include="styles\style.css" />
-    <Content Include="test-styles.css" />
-    <Content Include="test.html" />
     <Content Include="TODO.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -109,6 +108,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="QuizGame-Documentation.docx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
