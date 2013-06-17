@@ -13,11 +13,11 @@
 /// . select round winner and add points
 /// . repeat 2. until all fields are taken
 
-var site = (function ($) {
+var game = (function ($) {
     var PLAYER_COLOR = "rgba(255, 216, 0, 0.5)";
     var DUMMY_PLAYER_COLOR = "rgba(255, 106, 0, 0.5)";
 
-    var SiteController = Class.create({
+    var GameController = Class.create({
         initialize: function () {
             //var self = this;
             this.field = new QuizGame.GameField();
@@ -311,6 +311,6 @@ var site = (function ($) {
     });
 
     return {
-        SiteController: SiteController
+        GameController: GameController
     }
 }(jQuery));

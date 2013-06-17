@@ -53,6 +53,9 @@ var QuizGame = (function ($) {
             this._points = 0;
         },
         addPoints: function (points) {
+            if (points < 0) {
+                throw "Cannot add negative number of points!";
+            }
             this._points += points;
         },
         getName: function () {
@@ -108,7 +111,7 @@ var QuizGame = (function ($) {
                 throw "The answer of the question must be specified!";
             }
 
-            this.task = task;
+            this._task = task;
             this._answer = answer;
         },
         checkAnswer: function (inputAnswer) {
@@ -131,7 +134,7 @@ var QuizGame = (function ($) {
         initialize: function ($super, task, answer, choices) {
             $super(task, answer);
 
-            if (!choices) {
+            if (!choices || choices.length == 0 || choices.length != 4) {
                 throw "Invalid choices for the question! You must specify 4 answer choices!"
             }
 
@@ -170,6 +173,10 @@ var QuizGame = (function ($) {
                 throw "Invalid input limits! You muset specify down and up limit";
             }
 
+            if (downLimit > upLimit) {
+                throw "Down limit must be less than the up limit!";
+            }
+
             this._downLimit = downLimit;
             this._upLimit = upLimit;
         },
@@ -196,6 +203,7 @@ var QuizGame = (function ($) {
 
     return {
         GameField: GameField,
+        Question: Question,
         MultipleChoiceQuestion: MultipleChoiceQuestion,
         ShortAnswerQuestion: ShortAnswerQuestion,
         Player: Player,
