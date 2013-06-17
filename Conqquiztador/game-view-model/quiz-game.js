@@ -143,7 +143,7 @@ var QuizGame = (function ($) {
         render: function () {
             var container = $("<table class=" + MULTIPLE_CHOICE_CLASS + "></table>");
 
-            var task = "<tr><th colspan ='2'>" + this.task + "</td></tr>";
+            var task = "<tr><th colspan ='2'>" + this._task + "</td></tr>";
             container.append(task);
 
             for (var i = 1, counter = 1; i <= CHOICES_ROWS_COUNT; i += 1, counter += 2) {
@@ -188,7 +188,7 @@ var QuizGame = (function ($) {
         },
         render: function () {
             var container = $("<div class='" + SHORT_ANSWER_CLASS + "'></div>");
-            var task = "<p>" + this.task + "</p>";
+            var task = "<p>" + this._task + "</p>";
 
             var form = $("<form></form>");
             var input = "<input type='text' id='" + SHORT_ANSWER_ID + "' /><br />";

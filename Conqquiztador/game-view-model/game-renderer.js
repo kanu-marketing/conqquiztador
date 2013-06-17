@@ -40,7 +40,7 @@ var GameRenderer = (function ($) {
             var inputs = "<label for=" + NICKNAME_ID + ">Please enter your nickname:</label>" +
                          "<br />" +
                          "<input type='text' id=" + NICKNAME_ID + " />" +
-                         "<input type='button' id=" + NICKNAME_BUTTON_ID + " value='Play!' />";
+                         "<input type='button' id=" + NICKNAME_BUTTON_ID + " class =" + CONTAINER_CLASS + " value='Play!' />";
             form.append(inputs);
 
             container.append(form);
